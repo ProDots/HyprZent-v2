@@ -1,3 +1,40 @@
-/* nord Theme - Waybar */
-@define-color background #1e1e2e;
-@define-color foreground #cdd6f4;
+/* Nord theme for Waybar */
+
+* {
+  font-family: "Fira Sans", sans-serif;
+  font-size: 12px;
+  color: #D8DEE9;
+  background-color: #2E3440;
+}
+
+#clock {
+  color: #81A1C1;
+}
+
+#battery {
+  color: #BF616A;
+}
+
+#temperature {
+  color: #EBCB8B;
+}
+
+#network {
+  color: #A3BE8C;
+}
+
+#cpu {
+  color: #8FBCBB;
+}
+
+#memory {
+  color: #B48EAD;
+}
+
+#volume {
+  color: #4C566A;
+}
+
+#brightness {
+  color: #3B4252;
+}
