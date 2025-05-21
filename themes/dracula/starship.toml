@@ -1,2 +1,38 @@
-# dracula Theme - Starship
-add_newline = true
+# Dracula theme for Starship prompt
+
+[character]
+success_symbol = "❯"
+error_symbol = "✗"
+vicmd_symbol = "❮"
+style = "bold #f8f8f2"
+
+[git_branch]
+symbol = "🌿 "
+style = "bold #bd93f9"
+
+[git_status]
+conflicted = "🔥"
+ahead = "⇡"
+behind = "⇣"
+diverged = "↯"
+untracked = "?"
+stashed = "⚑"
+modified = "*"
+staged = "+"
+
+[cmd_duration]
+style = "bold #f1fa8c"
+
+[directory]
+style = "bold #f8f8f2"
+read_only = " "
+
+[hostname]
+style = "bold #ff79c6"
+format = "[$hostname]($style) "
+
+[time]
+format = "at [$time]($style) "
+disabled = false
+time_format = "%H:%M:%S"
+style = "bold #f8f8f2"
