@@ -1,3 +1,40 @@
-/* dracula Theme - Waybar */
-@define-color background #1e1e2e;
-@define-color foreground #cdd6f4;
+/* Dracula theme for Waybar */
+
+* {
+  font-family: "Fira Sans", sans-serif;
+  font-size: 12px;
+  color: #f8f8f2;
+  background-color: #282a36;
+}
+
+#clock {
+  color: #bd93f9;
+}
+
+#battery {
+  color: #ff5555;
+}
+
+#temperature {
+  color: #f1fa8c;
+}
+
+#network {
+  color: #50fa7b;
+}
+
+#cpu {
+  color: #8be9fd;
+}
+
+#memory {
+  color: #ff79c6;
+}
+
+#volume {
+  color: #d6acff;
+}
+
+#brightness {
+  color: #44475a;
+}
