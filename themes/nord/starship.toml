@@ -1,2 +1,36 @@
-# nord Theme - Starship
-add_newline = true
+[character]
+success_symbol = "❯"
+error_symbol = "✗"
+vicmd_symbol = "❮"
+style = "bold #D8DEE9"
+
+[git_branch]
+symbol = "🌿 "
+style = "bold #81A1C1"
+
+[git_status]
+conflicted = "🔥"
+ahead = "⇡"
+behind = "⇣"
+diverged = "↯"
+untracked = "?"
+stashed = "⚑"
+modified = "*"
+staged = "+"
+
+[cmd_duration]
+style = "bold #EBCB8B"
+
+[directory]
+style = "bold #D8DEE9"
+read_only = " "
+
+[hostname]
+style = "bold #B48EAD"
+format = "[$hostname]($style) "
+
+[time]
+format = "at [$time]($style) "
+disabled = false
+time_format = "%H:%M:%S"
+style = "bold #D8DEE9"
