@@ -1,2 +1,14 @@
-# catppuccin Theme - Zsh
-export ZSH_THEME="catppuccin"
+# Catppuccin Zsh config (Latte)
+
+autoload -U colors && colors
+
+# Prompt with Catppuccin Latte colors
+PROMPT='%F{#8839ef}%n@%m %F{#4c4f69}%1~ %# %f'
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+# Syntax highlighting plugin (opcional)
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
