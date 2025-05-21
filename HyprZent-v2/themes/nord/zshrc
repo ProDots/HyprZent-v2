@@ -1,0 +1,2 @@
+# nord Theme - Zsh
+export ZSH_THEME="nord"
