@@ -1,2 +1,38 @@
-# catppuccin Theme - Starship
-add_newline = true
+# Catppuccin Latte starship config
+
+[character]
+success_symbol = "❯"
+error_symbol = "✗"
+vicmd_symbol = "❮"
+style = "bold #4c4f69"
+
+[git_branch]
+symbol = "🌿 "
+style = "bold #8839ef"
+
+[git_status]
+conflicted = "🔥"
+ahead = "⇡"
+behind = "⇣"
+diverged = "↯"
+untracked = "?"
+stashed = "⚑"
+modified = "*"
+staged = "+"
+
+[cmd_duration]
+style = "bold #df8e1d"
+
+[directory]
+style = "bold #4c4f69"
+read_only = " "
+
+[hostname]
+style = "bold #8839ef"
+format = "[$hostname]($style) "
+
+[time]
+format = "at [$time]($style) "
+disabled = false
+time_format = "%H:%M:%S"
+style = "bold #4c4f69"
