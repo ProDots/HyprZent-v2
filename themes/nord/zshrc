@@ -1,2 +1,10 @@
-# nord Theme - Zsh
-export ZSH_THEME="nord"
+autoload -U colors && colors
+
+PROMPT='%F{#81A1C1}%n@%m %F{#D8DEE9}%1~ %# %f'
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
