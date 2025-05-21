@@ -1,3 +1,40 @@
-/* catppuccin Theme - Waybar */
-@define-color background #1e1e2e;
-@define-color foreground #cdd6f4;
+/* Catppuccin Latte style for Waybar */
+
+* {
+  font-family: "Fira Sans", sans-serif;
+  font-size: 12px;
+  color: #4c4f69;
+  background-color: #eff1f5;
+}
+
+#clock {
+  color: #8839ef;
+}
+
+#battery {
+  color: #d20f39;
+}
+
+#temperature {
+  color: #df8e1d;
+}
+
+#network {
+  color: #209fb5;
+}
+
+#cpu {
+  color: #40a02b;
+}
+
+#memory {
+  color: #179299;
+}
+
+#volume {
+  color: #ea76cb;
+}
+
+#brightness {
+  color: #dce0e8;
+}
