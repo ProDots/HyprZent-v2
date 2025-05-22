@@ -1,68 +1,161 @@
-# Código de Conducta para la Comunidad
+# Mejorando el contenido de index.mdx con estructura clara, etiquetas semánticas, SEO y accesibilidad
 
-<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0366d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:8px;">
-  <circle cx="12" cy="12" r="10"></circle>
-  <line x1="12" y1="16" x2="12" y2="12"></line>
-  <line x1="12" y1="8" x2="12" y2="8"></line>
-</svg>
-
-## Propósito
-
-El objetivo de este Código de Conducta es fomentar un entorno seguro, respetuoso e inclusivo para todos los participantes del proyecto. Queremos que todas las personas se sientan bienvenidas y valoradas, independientemente de su experiencia, identidad o antecedentes.
-
+better_index_mdx = '''---
+title: x5368x — Dotfiles & Ricing
+description: Perfil de x5368x, experto en personalización de entornos Linux como HyprZent v1.
 ---
 
-<svg width="48" height="48" viewBox="0 0 24 24" fill="#28a745" style="vertical-align:middle; margin-right:6px;">
-  <path d="M9 12l2 2 4-4"></path>
-</svg>
+import GitHubIcon from '../components/icons/github.svg'
+import DiscordIcon from '../components/icons/discord.svg'
+import TikTokIcon from '../components/icons/tiktok.svg'
+import YouTubeIcon from '../components/icons/youtube.svg'
 
-## Nuestros valores
+<style>{`
+  :root {
+    --accent: #3b82f6;
+    --text-light: #888;
+    --max-width: 720px;
+  }
 
-- **Respeto y cortesía:** Valorar todas las opiniones y tratar a los demás con amabilidad.
-- **Colaboración:** Fomentar el trabajo en equipo y la ayuda mutua.
-- **Comunicación abierta:** Expresar ideas de forma clara y constructiva.
-- **Inclusión:** Acoger a personas de todas las identidades y orígenes.
-- **Transparencia:** Actuar con integridad y honestidad.
+  body {
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    padding: 0 1rem;
+    color: #fff;
+    background: #0d1117;
+  }
 
----
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
 
-<svg width="48" height="48" viewBox="0 0 24 24" fill="#d73a49" style="vertical-align:middle; margin-right:6px;">
-  <circle cx="12" cy="12" r="10" stroke="none"></circle>
-  <line x1="12" y1="8" x2="12" y2="12" stroke="#fff" stroke-width="2"></line>
-  <circle cx="12" cy="16" r="1" fill="#fff"></circle>
-</svg>
+  a:hover {
+    text-decoration: underline;
+  }
 
-## Comportamientos inaceptables
+  header, section, footer {
+    max-width: var(--max-width);
+    margin: 3rem auto;
+  }
 
-- Lenguaje ofensivo, insultos o discriminación.
-- Acoso, intimidación o amenazas.
-- Publicar información privada sin permiso.
-- Conducta disruptiva o sabotaje.
-- Uso no autorizado del nombre o marcas del proyecto.
+  header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+  }
 
----
+  header p {
+    font-size: 1.25rem;
+    color: var(--text-light);
+  }
 
-<svg width="48" height="48" viewBox="0 0 24 24" fill="#0366d6" style="vertical-align:middle; margin-right:6px;">
-  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path>
-  <path d="M12 6v6l4 2"></path>
-</svg>
+  .contact-list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
 
-## Reporte y cumplimiento
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+  }
 
-Si experimentas o presencias un comportamiento inapropiado, por favor contacta de forma confidencial a:
+  .contact-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
 
-📧 **zenthrax@example.com**
+  ul {
+    padding-left: 1.5rem;
+  }
 
-Los reportes serán tratados con seriedad y confidencialidad. Los líderes del proyecto tomarán las medidas necesarias para garantizar un ambiente seguro.
+  footer {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 4rem;
+  }
+`}</style>
 
----
+<header>
+  <h1>x5368x</h1>
+  <p>Linux Ricer · Dotfile Engineer · Visual Designer</p>
+</header>
 
-## Atribución
+<main>
+  <section aria-labelledby="about-me">
+    <h2 id="about-me">Sobre mí</h2>
+    <p>
+      Soy <strong>x5368x</strong>, diseñador de entornos personalizados en Linux, especializado en <em>Hyprland</em>. Me enfoco en ofrecer configuraciones estéticas, funcionales y fáciles de instalar para usuarios avanzados de Arch Linux.
+    </p>
+    <p>
+      Actualmente desarrollo <strong>HyprZent v1</strong>, un entorno modular, oscuro y altamente visual para una experiencia de usuario fluida.
+    </p>
+  </section>
 
-Este Código de Conducta está basado en el [Contributor Covenant v2.1](https://www.contributor-covenant.org/es/version/2/1/code_of_conduct/), adaptado y enriquecido con elementos visuales para mejorar la experiencia.
+  <section aria-labelledby="contact">
+    <h2 id="contact">Contacto & Redes</h2>
+    <div className="contact-list">
+      <div className="contact-item">
+        <GitHubIcon className="contact-icon" />
+        GitHub: <a href="https://github.com/ProDots/HyprZent-v2" target="_blank" rel="noopener noreferrer">@x5368x</a>
+      </div>
+      <div className="contact-item">
+        <DiscordIcon className="contact-icon" />
+        Discord: <a href="https://discord.gg/NdtChxcaU8" target="_blank" rel="noopener noreferrer">Servidor HyprZent</a> (<code>x_536.8</code>)
+      </div>
+      <div className="contact-item">
+        <TikTokIcon className="contact-icon" />
+        TikTok: <a href="https://www.tiktok.com/@x_536.8" target="_blank" rel="noopener noreferrer">@x_536.8</a>
+      </div>
+      <div className="contact-item">
+        <YouTubeIcon className="contact-icon" />
+        YouTube: <a href="https://youtube.com/@xzn-q7n9q?si=jgDOsYd3g6pmvyw" target="_blank" rel="noopener noreferrer">@xzn-q7n9q</a>
+      </div>
+    </div>
+  </section>
 
----
+  <section aria-labelledby="project">
+    <h2 id="project">HyprZent v1</h2>
+    <p>
+      <strong>HyprZent</strong> es un entorno visual completo con:
+    </p>
+    <ul>
+      <li>Instalación automatizada (<code>install.sh</code>, <code>set-theme.sh</code>)</li>
+      <li>Temas populares: Catppuccin, Dracula, Nord, Gruvbox</li>
+      <li>Wallpapers 4K</li>
+      <li>Colores dinámicos con <code>pywal</code> + <code>swww</code></li>
+      <li>Diseño modular, ligero y coherente</li>
+    </ul>
+    <p>
+      Explora el código en:  
+      <a href="https://github.com/ProDots/HyprZent-v2" target="_blank" rel="noopener noreferrer">github.com/ProDots/HyprZent-v2</a>
+    </p>
+  </section>
 
-*Gracias por contribuir a una comunidad abierta, respetuosa y colaborativa.*
+  <section aria-labelledby="roadmap">
+    <h2 id="roadmap">¿Qué sigue?</h2>
+    <p>Próximamente:</p>
+    <ul>
+      <li>Instalación con un solo comando</li>
+      <li>Dotfiles sincronizados con estilo visual</li>
+      <li>Actualizaciones OTA para los módulos visuales</li>
+    </ul>
+  </section>
+</main>
 
+<footer>
+  Gracias por visitar.<br />
+  <em>HyprZent v1 estará disponible muy pronto.</em>
+</footer>
+'''
 
+# Guardar el archivo mejorado
+better_index_path = Path("/mnt/data/index.mdx")
+better_index_path.write_text(better_index_mdx)
+better_index_path.name
