@@ -1,137 +1,151 @@
 
-<!-- HEADER CON LOGOS OPTIMIZADOS -->
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark-120px-plus.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png">
-    <img alt="GitHub" height="60" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ProDots/HyprZent-v2/main/assets/hyprzent-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ProDots/HyprZent-v2/main/assets/hyprzent-light.svg">
+    <img alt="HyprZent Logo" width="300" style="filter: drop-shadow(0 0 10px rgba(110,69,226,0.4))">
   </picture>
-  <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git" height="60" style="margin:0 20px">
-  <h1 style="border-bottom: none; margin-top: 20px;">✨ Dotfiles Contribution Guide ✨</h1>
+  
+  <h1 style="
+      font-size: 2.8rem;
+      margin: 1rem 0;
+      background: linear-gradient(90deg, #6e45e2, #88d3ce);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  ">
+    ✨ HyprZent Contribution Guide ✨
+  </h1>
+  
+  <!-- Badges interactivos -->
+  [![PRs Welcome](https://img.shields.io/badge/PRs-WELCOME-6e45e2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ProDots/HyprZent-v2/pulls)
+  [![Powered by Hyprland](https://img.shields.io/badge/Powered_by-HYPRLAND-ff79c6?style=for-the-badge&logo=gnu-bash&logoColor=white)](https://hyprland.org)
+  [![License](https://img.shields.io/badge/License-MIT-50fa7b?style=for-the-badge&logo=bookstack&logoColor=white)](LICENSE)
 </div>
 
 ---
 
-## **🌍 Bilingual Guide**  
-*(Click [here](#-español) for Spanish version | Haz clic [aquí](#-english) para versión en inglés)*
+## 🌍 Bilingual Guide  
+*(Click [here](#english-version) for English | Haz clic [aquí](#versión-en-español) para español)*
 
 ---
 
-<div id="-english"></div>
+<div id="english-version"></div>
 
-# 🇬🇧 **ENGLISH VERSION**
+## 🇬🇧 **ENGLISH VERSION**
 
-## 📜 **Code of Conduct**  
-We adhere to the [Contributor Covenant](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).  
-🔍 **Report issues**: maintainer@example.com  
-
-## 🚀 **Contribution Workflow**
-
-```mermaid
-graph TD
-    A[Fork Repository] --> B[Create Branch]
-    B --> C[Make Changes]
-    C --> D[Test Changes]
-    D --> E[Update Documentation]
-    E --> F[Open Pull Request]
-    F --> G[Code Review]
-    G --> H{Merge?}
-    H -->|Yes| I[Congratulations!]
-    H -->|No| C
+### 📜 Code of Conduct  
+```diff
++ We follow the [Contributor Covenant](https://www.contributor-covenant.org/version/2/1/code_of_conduct/)  
+! Report issues: maintainer@hyprzent.org
 ```
 
-## 🛠 **How to Contribute**
+### 🚀 **Contribution Workflow**
+```mermaid
+%%{init: {'theme': 'dark'}}%%
+graph TD
+    A[Fork Repo] --> B[Create Branch]
+    B --> C[Make Changes]
+    C --> D[Test in VM]
+    D --> E[Update Docs]
+    E --> F[Open PR]
+    F --> G{Approved?}
+    G -->|Yes| H[Merge!]
+    G -->|No| C
+```
 
-### **1. 🐛 Reporting Bugs**
+### 🛠 **How to Contribute**
+
+#### 🐞 **Reporting Bugs**
 ```markdown
 **Environment**:
-- OS: [e.g. macOS Sonoma]
-- Shell: [e.g. zsh 5.9]
-- Dotfiles Version: [e.g. v2.3.1]
+- Hyprland Version: [e.g. v0.30.0]
+- OS: [e.g. Arch Linux 2023.12.01]
 
 **Steps to Reproduce**:
 1. ...
 2. ...
 
-**Expected Behavior**:
-**Actual Behavior**:
+**Expected vs Actual Behavior**:
 ```
 
-### **2. 💡 Feature Requests**
+#### ✨ **Feature Requests**
 ```markdown
 **Description**:
 **Motivation**:
-**Proposed Solution**:
+**Example Config**:
 ```
 
-### **3. 📦 Pull Requests**
+#### 📦 **Pull Requests**
+```markdown
 - Branch naming: `feat/name` or `fix/issue-#`
-- Required checks:
-  - [ ] Tests pass
-  - [ ] Documentation updated
-  - [ ] CHANGELOG entry
+- Requirements:
+  - [ ] Tested in VM
+  - [ ] Docs updated
+  - [ ] Screenshots attached
+```
 
 ---
 
-<div id="-español"></div>
+<div id="versión-en-español"></div>
 
-# 🇪🇸 **VERSIÓN EN ESPAÑOL**
+## 🇪🇸 **VERSIÓN EN ESPAÑOL**
 
-## 📜 **Código de Conducta**  
-Adoptamos el [Contributor Covenant](https://www.contributor-covenant.org/es/version/2/1/code_of_conduct/).  
-🔍 **Reportar problemas**: mantenedor@example.com  
-
-## 🚀 **Flujo de Contribución**
-
-```mermaid
-graph TD
-    A[Bifurcar Repositorio] --> B[Crear Rama]
-    B --> C[Realizar Cambios]
-    C --> D[Probar Cambios]
-    D --> E[Actualizar Documentación]
-    E --> F[Abrir Pull Request]
-    F --> G[Revisión de Código]
-    G --> H{¿Aprobar?}
-    H -->|Sí| I[¡Felicidades!]
-    H -->|No| C
+### 📜 Código de Conducta  
+```diff
++ Seguimos el [Contributor Covenant](https://www.contributor-covenant.org/es/version/2/1/code_of_conduct/)  
+! Reportar problemas: mantenedor@hyprzent.org
 ```
 
-## 🛠 **Cómo Contribuir**
+### 🚀 **Flujo de Contribución**
+```mermaid
+%%{init: {'theme': 'dark'}}%%
+graph TD
+    A[Bifurcar Repo] --> B[Crear Rama]
+    B --> C[Hacer Cambios]
+    C --> D[Probar en VM]
+    D --> E[Actualizar Docs]
+    E --> F[Abrir PR]
+    F --> G{¿Aprobado?}
+    G -->|Sí| H[¡Fusionar!]
+    G -->|No| C
+```
 
-### **1. 🐛 Reportar Errores**
+### 🛠 **Cómo Contribuir**
+
+#### 🐞 **Reportar Errores**
 ```markdown
 **Entorno**:
-- SO: [ej. Ubuntu 22.04]
-- Shell: [ej. bash 5.1]
-- Versión: [ej. v2.3.1]
+- Versión Hyprland: [ej. v0.30.0]
+- SO: [ej. Arch Linux 2023.12.01]
 
 **Pasos para Reproducir**:
 1. ...
 2. ...
 
-**Comportamiento Esperado**:
-**Comportamiento Actual**:
+**Comportamiento Esperado vs Actual**:
 ```
 
-### **2. 💡 Solicitar Funcionalidades**
+#### ✨ **Solicitar Funciones**
 ```markdown
 **Descripción**:
 **Motivación**:
-**Solución Propuesta**:
+**Config de Ejemplo**:
 ```
 
-### **3. 📦 Pull Requests**
-- Nombrado de ramas: `feat/nombre` o `fix/issue-#`
+#### 📦 **Pull Requests**
+```markdown
+- Nombre de rama: `feat/nombre` o `fix/issue-#`
 - Requisitos:
-  - [ ] Pruebas exitosas
-  - [ ] Documentación actualizada
-  - [ ] Entrada en CHANGELOG
+  - [ ] Probado en VM
+  - [ ] Docs actualizados
+  - [ ] Capturas adjuntas
+```
 
 ---
 
-<!-- FOOTER WITH BADGES -->
-<div align="center" style="margin-top: 40px;">
-  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge" alt="PRs Welcome">
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License">
-  <p style="margin-top: 20px;">✨ Thank you for contributing! / ¡Gracias por contribuir! ✨</p>
+<div align="center" style="margin-top:3rem">
+  <img src="https://raw.githubusercontent.com/ProDots/HyprZent-v2/main/assets/hyprland-badge.svg" width="150">
+  <p>✨ Thank you for contributing! / ¡Gracias por contribuir! ✨</p>
 </div>
