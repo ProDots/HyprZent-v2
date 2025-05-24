@@ -21,7 +21,7 @@
   <!-- Badges interactivos -->
   [![PRs Welcome](https://img.shields.io/badge/PRs-WELCOME-6e45e2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ProDots/HyprZent-v2/pulls)
   [![Powered by Hyprland](https://img.shields.io/badge/Powered_by-HYPRLAND-ff79c6?style=for-the-badge&logo=gnu-bash&logoColor=white)](https://hyprland.org)
-  [![License](https://img.shields.io/badge/License-MIT-50fa7b?style=for-the-badge&logo=bookstack&logoColor=white)](LICENSE)
+  [![License](https://img.shields.io/badge/License-Apache-50fa7b?style=for-the-badge&logo=bookstack&logoColor=white)](LICENSE)
 </div>
 
 ---
