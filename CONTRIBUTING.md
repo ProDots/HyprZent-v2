@@ -27,7 +27,7 @@
 ---
 
 ## 🌍 Bilingual Guide  
-*(Click [here](#english-version) for English | Haz clic [aquí](#versión-en-español) para español)*
+*(Click [here](#english-version) for English | Haz clic [aquí](#versión-español) para español)*
 
 ---
 
