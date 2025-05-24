@@ -1,0 +1,124 @@
+<!-- SVG LOGOS (Header) -->
+<div align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/GitHub_icon.svg" width="100" alt="GitHub Logo">
+  <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" width="100" alt="Git Logo">
+  <h1>✨ CONTRIBUTING GUIDE / GUÍA DE CONTRIBUCIONES ✨</h1>
+</div>
+
+---
+
+## **🌎 Bilingual Guide | Guía Bilingüe**  
+*(Scroll down for English | Desplázate hacia abajo para español)*  
+
+---
+
+# **🇬🇧 ENGLISH**  
+
+## **📜 Code of Conduct**  
+<img src="https://www.vectorlogo.zone/logos/opensource/opensource-icon.svg" width="30" align="left">  
+We adhere to the [Contributor Covenant](https://www.contributor-covenant.org/). By participating, you agree to uphold this code.  
+**Violations?** Contact: `email@example.com`.  
+
+---
+
+## **🚀 How to Contribute**  
+### **1. 🐛 Reporting Bugs**  
+<img src="https://www.vectorlogo.zone/logos/bugcrowd/bugcrowd-icon.svg" width="25" align="left">  
+- Search [existing issues](https://github.com/yourusername/dotfile/issues) first.  
+- Use the **Bug Report Template** and include:  
+  ```markdown
+  ### Environment  
+  - OS: [e.g., macOS 14]  
+  - Shell: [e.g., zsh 5.9]  
+  ### Steps to Reproduce  
+  1. ...  
+  ### Expected vs Actual Behavior  
+  ```  
+
+### **2. 💡 Feature Requests**  
+<img src="https://www.vectorlogo.zone/logos/google_chrome/google_chrome-icon.svg" width="25" align="left">  
+- Tag with `enhancement` and provide:  
+  - **Use case** (why is this valuable?).  
+  - **Mockups** (Figma/SVG links preferred).  
+
+### **3. 🛠 Pull Requests**  
+<img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" width="25" align="left">  
+- Branch naming: `feat/description` or `fix/issue-number`.  
+- **Tests required** for new features.  
+- Update `CHANGELOG.md` (if applicable).  
+
+---
+
+## **⚙️ Development Setup**  
+```bash
+git clone https://github.com/yourusername/dotfile.git  
+cd dotfile && npm install  # or other package manager  
+```
+
+---
+
+## **🎨 Style Guide**  
+| Category       | Rule                          |  
+|----------------|-------------------------------|  
+| **Variables**  | `lower_snake_case`            |  
+| **Functions**  | `lowerCamelCase`              |  
+| **Commits**    | Follow [Conventional Commits](https://www.conventionalcommits.org) |  
+
+---
+
+# **🇪🇸 ESPAÑOL**  
+
+## **📜 Código de Conducta**  
+<img src="https://www.vectorlogo.zone/logos/opensource/opensource-icon.svg" width="30" align="left">  
+Seguimos el [Pacto de Colaboradores](https://www.contributor-covenant.org/es/). Cualquier violación debe reportarse a `email@example.com`.  
+
+---
+
+## **🚀 Cómo Contribuir**  
+### **1. 🐛 Reportar Errores**  
+<img src="https://www.vectorlogo.zone/logos/bugcrowd/bugcrowd-icon.svg" width="25" align="left">  
+- Busca en [issues existentes](https://github.com/yourusername/dotfile/issues).  
+- Usa la **Plantilla de Bugs** e incluye:  
+  ```markdown
+  ### Ambiente  
+  - SO: [ej. Ubuntu 22.04]  
+  - Shell: [ej. bash 5.1]  
+  ### Pasos para Reproducir  
+  1. ...  
+  ```  
+
+### **2. 💡 Solicitar Funcionalidades**  
+<img src="https://www.vectorlogo.zone/logos/google_chrome/google_chrome-icon.svg" width="25" align="left">  
+- Etiqueta con `enhancement` y provee:  
+  - **Caso de uso** (¿por qué es útil?).  
+  - **Bocetos** (preferible en SVG/Figma).  
+
+### **3. 🛠 Pull Requests**  
+<img src="https://www.vectorlogo.zone/logos/github/github-icon.svg" width="25" align="left">  
+- Nombra ramas: `feat/descripción` o `fix/issue-número`.  
+- **Pruebas obligatorias** para nuevas features.  
+- Actualiza `CHANGELOG.md` (si aplica).  
+
+---
+
+## **⚙️ Configuración de Desarrollo**  
+```bash
+git clone https://github.com/tuusuario/dotfile.git  
+cd dotfile && npm install  # u otro gestor de paquetes  
+```
+
+---
+
+## **🎨 Guía de Estilo**  
+| Categoría      | Regla                         |  
+|----------------|-------------------------------|  
+| **Variables**  | `lower_snake_case`            |  
+| **Funciones**  | `lowerCamelCase`              |  
+| **Commits**    | Usa [Conventional Commits](https://www.conventionalcommits.org/es/) |  
+
+---
+
+<div align="center">
+  <img src="https://www.vectorlogo.zone/logos/creativecommons/creativecommons-icon.svg" width="80">
+  <p>Licensed under <a href="LICENSE">MIT</a> | ¡Gracias por contribuir! 💖</p>
+</div>
