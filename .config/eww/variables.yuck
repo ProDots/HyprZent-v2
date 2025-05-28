@@ -1,47 +1,75 @@
+;; Variables y Polls para eww - Versión Completa, Robusta y Funcional
+
+;; Volumen de audio (script externo)
 (defpoll volume :interval "1s"
-  "scripts/getVol.sh")
+  "scripts/getVol.sh || echo 0")
+
+;; Estado de red WiFi activo y SSID
 (defpoll networkstatus :interval "1s"
-  `nmcli -t -f active,ssid dev wifi | grep "yes" | cut -c5-`)
+  "nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -c5- || echo ''")
+
+;; Estado de Bluetooth (Powered On/Off)
 (defpoll bluetoothstatus :interval "1s"
-  `bluetoothctl show | grep "Powered" | cut -c11-`)
+  "bluetoothctl show | grep 'Powered' | awk '{print $2}' || echo 'off'")
+
+;; Temperatura CPU (primer sensor temp1), incluye decimal si existe
 (defpoll temp :interval "1s"
-  "sensors | grep -A 0 'temp1' | cut -c16-17")
+  "sensors | grep 'temp1' | head -n1 | grep -o '[0-9]\\+\\.?[0-9]*' || echo 'N/A'")
+
+;; Uso de CPU (porcentaje)
 (defpoll cpusage :interval "1s"
-  "vmstat 1 2 | awk 'END { print 100 - $15 }'")
+  "vmstat 1 2 | awk 'END { print 100 - $15 }' || echo 0")
+
+;; Uso de memoria (porcentaje)
 (defpoll memoryusage :interval "1s"
-  `free -m | awk 'NR==2{printf "%.f", $3*100/$2 }'`)
+  "free -m | awk 'NR==2{printf \"%.f\", $3*100/$2 }' || echo 0")
 
-
+;; Tiempo activo del sistema (uptime), quitando 'up ' inicial
 (defpoll uptime :interval "60s"
-  "uptime -p | cut -c3-")
-(defpoll brightness :interval "5"
-  "brightnessctl -m echo 'text|jdbc' | sed -e 's/,/\ /g' | awk '{print $3/$5*100}'")
+  "uptime -p | sed 's/^up //' || echo 'unknown'")
 
+;; Brillo de pantalla (porcentaje), evita división por cero
+(defpoll brightness :interval "5s"
+  "brightnessctl -m | awk -F',' '{if ($5 != 0) printf \"%.0f\", ($3/$5)*100; else print 0}' || echo 0")
 
+;; Carátula del reproductor (art URL corregido)
 (defpoll musicartlink :interval "1s"
-  `playerctl metadata --format "{{ mpris:artUrl }}" | sed 's/b273/1e02/'`)
+  "playerctl metadata --format '{{ mpris:artUrl }}' | sed 's/b273/1e02/' || echo ''")
+
+;; Posición actual de la música (segundos)
 (defpoll musicposition :interval "1s"
-  `playerctl metadata --format "{{ duration(position) }}"`)
+  "playerctl metadata --format '{{ duration(position) }}' || echo 0")
+
+;; Duración total de la pista (segundos)
 (defpoll musiclength :interval "10s"
-  `playerctl metadata --format "{{ duration(mpris:length)}}"`)
+  "playerctl metadata --format '{{ duration(mpris:length) }}' || echo 0")
+
+;; Porcentaje reproducido de la pista, con fallback seguro
 (defpoll musicpositionpercentage :interval "1s"
-  `playerctl metadata --format "{{ position / (mpris:length / 100)  }}"`)
-(defpoll playingorpaused :interval "0" 
-  `playerctl status`)
+  "playerctl metadata --format '{{ position / (mpris:length / 100) }}' 2>/dev/null || echo 0")
+
+;; Estado del reproductor (Playing, Paused, Stopped)
+(defpoll playingorpaused :interval "1s"
+  "playerctl status || echo 'Stopped'")
+
+;; Información actual de la pista (título - artista)
 (defpoll music :interval "1s"
-  "playerctl metadata --format '{{ title }} - {{ artist }}' || true")
+  "playerctl metadata --format '{{ title }} - {{ artist }}' || echo ''")
+
+;; Título corto de la pista (hasta 30 caracteres)
 (defpoll musicshort :interval "1s"
-  `playerctl metadata --format '{{ title }}' | cut -c1-30`)
+  "playerctl metadata --format '{{ title }}' | cut -c1-30 || echo ''")
 
-
+;; Variables booleanas para estados toggle
 (defvar ismusicopenornot false)
 (defvar bluetoggle false)
 (defvar nighttoggle false)
 
-(defvar notification ``)
+;; Variables para notificaciones
+(defvar notification "")
 (defvar notificationreveal false)
 (defvar notifsliteral "")
 
+;; Nombre del mes actual
 (defpoll monthname :interval "2s"
-  "date +%B"
-)
+  "date +%B || echo ''")
