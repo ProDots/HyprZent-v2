@@ -1,30 +1,53 @@
 #!/bin/bash
 
-IFS=$'\n'
+notif_file="$HOME/.config/eww/notifhistory"
 
-notifs="(box :orientation \"v\" :spacing 10"
+# Escapar texto para Eww (escapa comillas dobles y barras invertidas)
+escape_for_eww() {
+    echo "$1" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g'
+}
 
-if [ -s ~/.config/eww/notifhistory ]; then
-    echo "ignroe this"
-else 
+# Si el archivo no existe o está vacío, limpiamos literal y salimos
+if [ ! -s "$notif_file" ]; then
     eww update notifsliteral=""
-    exit 1
+    exit 0
 fi
 
-last_lines=$(tail -n 4 "/home/vewu/.config/eww/notifhistory")
+# Inicializamos contenedor Eww
+notifs="(box :orientation \"v\" :spacing 10"
 
-for line in $last_lines; do
-    if [ "$(echo "$line" | jq -r '.source')" != "Spotify" ] && [ "$(echo "$line" | jq -r '.source')" != "VOLUME" ]; then
-        notifs+="(box :orientation \"v\" :space-evenly \"false\" :valign \"end\" :class \"notificationbox\" \
-                (box :spacing 10 :space-evenly \"false\" \
-                    (label :class \"summary\" :text $(echo "$line" | jq '.summary' | cut -c1-40) :halign \"start\") \
-                ) \
-                (label :class \"body\" :text $(echo "$line" | jq '.body' | cut -c1-40) :halign \"start\") \
-                )"
-        echo "$line"
+# Leemos últimas 4 líneas y procesamos
+while IFS= read -r line; do
+    source=$(jq -r '.source // empty' <<< "$line")
+
+    # Filtramos fuentes no deseadas
+    if [[ "$source" != "Spotify" && "$source" != "VOLUME" ]]; then
+        # Usamos // empty para evitar null y valores vacíos
+        summary=$(jq -r '.summary // empty' <<< "$line" | cut -c1-40)
+        body=$(jq -r '.body // empty' <<< "$line" | cut -c1-40)
+
+        # Si no hay summary ni body, ignoramos esta notificación
+        if [[ -z "$summary" && -z "$body" ]]; then
+            continue
+        fi
+
+        # Escapamos texto para seguridad en Eww
+        summary_escaped=$(escape_for_eww "$summary")
+        body_escaped=$(escape_for_eww "$body")
+
+        # Construimos bloque de notificación
+        notifs+="
+        (box :orientation \"v\" :space-evenly \"false\" :valign \"end\" :class \"notificationbox\"
+            (box :spacing 10 :space-evenly \"false\"
+                (label :class \"summary\" :text \"$summary_escaped\" :halign \"start\")
+            )
+            (label :class \"body\" :text \"$body_escaped\" :halign \"start\")
+        )"
     fi
-done
+done < <(tail -n 4 "$notif_file")
 
-eww update notifsliteral="$notifs)"
+# Cerramos contenedor
+notifs+=")"
 
-IFS=
+# Actualizamos eww
+eww update notifsliteral="$notifs"
