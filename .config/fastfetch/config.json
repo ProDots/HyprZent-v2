@@ -125,16 +125,29 @@
       "format": "               \u001b[90m  \u001b[38;5;124m  \u001b[38;5;142m  \u001b[38;5;180m  \u001b[38;5;109m  \u001b[38;5;173m  \u001b[38;5;221m  \u001b[38;5;117m "
     },
 
-    "break"
+    "break",
 
-    /* Para activar el mini-logo, añade una coma al final del array "modules" justo aquí, y descomenta este bloque:
-
-    ,
-    {
-      "type": "custom",
-      "format": "file:~/.config/fastfetch/logos/mini-logo.ascii"
-    }
-
-    */
+    /*
+     * ───── Logos alternativos ─────
+     * Para activar cualquiera, estos son los pasos:
+     * 
+     * 1. Deja la coma después de "break" (ya está).
+     * 2. Descomenta uno o ambos bloques siguientes.
+     * 
+     * Mini-logo (para setups compactos o estéticos)
+     * {
+     *   "type": "custom",
+     *   "format": "file:~/.config/fastfetch/logos/mini-logo.ascii"
+     * },
+     * 
+     * Arch-logo (logo clásico de Arch Linux, opcional o decorativo)
+     * {
+     *   "type": "custom",
+     *   "format": "file:~/.config/fastfetch/logos/arch-logo.ascii"
+     * }
+     * 
+     * Si activas los dos, no olvides mantener la coma entre ellos.
+     * Puedes moverlos arriba si deseas mostrar los logos al inicio.
+     */
   ]
 }
