@@ -1,6 +1,5 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-
   "logo": {
     "type": "file",
     "source": "~/.config/fastfetch/logos/main-logo.ascii",
@@ -12,10 +11,33 @@
       "5": "#A3BE8C"
     }
   },
-
   "modules": [
-    "break",
+    // ================================================
+    // 🔘 LOGOS ALTERNATIVOS (Descomenta solo el que necesites)
+    // ================================================
+    // "break",  // ¡No olvides descomentar este "break" si activas un logo!
 
+    // —— Logo minimalista (para terminales pequeñas) ——
+    /*
+    {
+      "type": "custom",
+      "format": "file:~/.config/fastfetch/logos/mini-logo.ascii"
+    },
+    "break",
+    */
+
+    // —— Logo clásico de Arch Linux (estilo retro) ——
+    /*
+    {
+      "type": "custom",
+      "format": "file:~/.config/fastfetch/logos/arch-logo.ascii"
+    },
+    "break",
+    */
+
+    // ================================================
+    // 🖥️ SECCIÓN HARDWARE 
+    // ================================================
     {
       "type": "custom",
       "format": "┌────────────────────── Hardware ──────────────────────┐",
@@ -28,19 +50,19 @@
     },
     {
       "type": "cpu",
-      "key": "│ ├󰍛 CPU",
+      "key": "│ ├─󰍛 CPU",
       "showPeCoreCount": true,
       "format": "{1}",
       "keyColor": "#A3BE8C"
     },
     {
       "type": "gpu",
-      "key": "│ ├󰍛 GPU",
+      "key": "│ ├─󰍛 GPU",
       "keyColor": "#A3BE8C"
     },
     {
       "type": "memory",
-      "key": "└ └󰍛 Memory",
+      "key": "└─󰍛 Memoria",
       "keyColor": "#A3BE8C"
     },
     {
@@ -50,6 +72,9 @@
     },
     "break",
 
+    // ================================================
+    // 📦 SECCIÓN SOFTWARE 
+    // ================================================
     {
       "type": "custom",
       "format": "┌────────────────────── Software ──────────────────────┐",
@@ -62,32 +87,40 @@
     },
     {
       "type": "kernel",
-      "key": "│ ├ Kernel",
+      "key": "│ ├─ Kernel",
       "keyColor": "#EBCB8B"
     },
     {
       "type": "packages",
-      "key": "│ ├󰏖 Packages",
+      "key": "│ ├─󰏖 Paquetes",
       "keyColor": "#EBCB8B"
     },
     {
       "type": "shell",
-      "key": "│ ├ Shell",
+      "key": "│ ├─ Shell",
       "keyColor": "#EBCB8B"
     },
     {
       "type": "command",
-      "key": "│ ├ OS Age",
+      "key": "│ ├─ Instalado",
       "keyColor": "#EBCB8B",
-      "text": "echo \"Installed: $(date -d @$(stat -c %W /) +'%Y-%m-%d')\""
+      "text": "echo \"$(ls -lct --time=birth / | tail -1 | awk '{print $6, $7, $8}')\""
     },
     {
       "type": "uptime",
-      "key": "└ └ Uptime",
+      "key": "└─ Uptime",
       "keyColor": "#EBCB8B"
     },
     "break",
 
+    // ================================================
+    // 🖌️ SECCIÓN DESKTOP 
+    // ================================================
+    {
+      "type": "custom",
+      "format": "┌────────────────────── Desktop ───────────────────────┐",
+      "outputColor": "#BF616A"
+    },
     {
       "type": "de",
       "key": " DE",
@@ -95,23 +128,23 @@
     },
     {
       "type": "lm",
-      "key": "│ ├ LM",
+      "key": "│ ├─ LM",
       "keyColor": "#88C0D0"
     },
     {
       "type": "wm",
-      "key": "│ ├ WM",
+      "key": "│ ├─ WM",
       "keyColor": "#88C0D0"
     },
     {
-      "type": "gpu",
-      "key": "│ ├󰍛 GPU Driver",
-      "format": "{3}",
-      "keyColor": "#88C0D0"
+      "type": "command",
+      "key": "│ ├─󰍛 Driver GPU",
+      "keyColor": "#88C0D0",
+      "text": "glxinfo | grep 'OpenGL renderer' | awk -F':' '{print $2}' | sed 's/^ //'"
     },
     {
       "type": "wmtheme",
-      "key": "└ └󰉼 Theme",
+      "key": "└─󰉼 Tema",
       "keyColor": "#88C0D0"
     },
     {
@@ -119,35 +152,14 @@
       "format": "└────────────────────────────────────────────────────┘",
       "outputColor": "#BF616A"
     },
-
-    {
-      "type": "custom",
-      "format": "               \u001b[90m  \u001b[38;5;124m  \u001b[38;5;142m  \u001b[38;5;180m  \u001b[38;5;109m  \u001b[38;5;173m  \u001b[38;5;221m  \u001b[38;5;117m "
-    },
-
     "break",
 
-    /*
-     * ───── Logos alternativos ─────
-     * Para activar cualquiera, estos son los pasos:
-     * 
-     * 1. Deja la coma después de "break" (ya está).
-     * 2. Descomenta uno o ambos bloques siguientes.
-     * 
-     * Mini-logo (para setups compactos o estéticos)
-     * {
-     *   "type": "custom",
-     *   "format": "file:~/.config/fastfetch/logos/mini-logo.ascii"
-     * },
-     * 
-     * Arch-logo (logo clásico de Arch Linux, opcional o decorativo)
-     * {
-     *   "type": "custom",
-     *   "format": "file:~/.config/fastfetch/logos/arch-logo.ascii"
-     * }
-     * 
-     * Si activas los dos, no olvides mantener la coma entre ellos.
-     * Puedes moverlos arriba si deseas mostrar los logos al inicio.
-     */
+    // ================================================
+    // ✨ DECORACIÓN FINAL (Puntos de colores)
+    // ================================================
+    {
+      "type": "custom",
+      "format": "{?0>$(($(tput cols)/2-10))}\u001b[90m  \u001b[38;5;124m  \u001b[38;5;142m  \u001b[38;5;180m  \u001b[38;5;109m  \u001b[38;5;173m  \u001b[38;5;221m  \u001b[38;5;117m"
+    }
   ]
 }
