@@ -1,10 +1,8 @@
 * {
-  /* Default background color */
   background-color: transparent;
   text-color:       #d6d6d6;
   font: "JetBrainsMono Bold 10";
 }
-
 
 window {
   x-offset: 0px;
@@ -12,11 +10,12 @@ window {
   location: south west;
 
   padding: 15px 15px 5px 15px;
-  border-color: #d6d6d6;
+  border-color: #81A1C1;         /* azul nordic suave */
   border-radius: 0px 20px 0px 0px;
-  border: 0px;
-  background-color: #111111;
-  width:350px;
+  border: 1.5px solid;           /* para mejor definición */
+  background-color: #2E3440;     /* fondo azul grisáceo típico Nordic */
+  width: 350px;
+  transition: background-color 150ms ease;
 }
 
 mainbox {
@@ -27,13 +26,18 @@ mainbox {
 element {
   background: transparent;
   children: [element-text];
+  border-radius: 15px;
+  padding: 10px;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
 inputbar {
-  background-color: transparent;
+  background-color: #3B4252;     /* ligeramente más claro que el fondo */
   children: [entry];
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-bottom: 10px;
 }
-
 
 listview, message {
   padding: 10px;
@@ -45,35 +49,33 @@ listview, message {
 
 listview {
   spacing: 7px;
-  background-color: #252525;
+  background-color: #434C5E;     /* fondo para la lista, más visible */
   border-radius: 20px;
   margin: 10px 0px 0px 0px;
   scrollbar:    false;
 }
 
-element {
-    padding: 10px;
-    border-radius: 20px;
+element normal.normal, element.alternate.normal {
+  background-color: transparent;
+  text-color:       #d8dee9;     /* texto más claro para mejor contraste */
 }
-element normal.normal, element.alternate.normal{
-    background-color: transparent;
-    text-color:       #d6d6d6;
-}
+
 element.selected.normal {
-    background-color: #d6d6d6;
-    text-color:       #d6d6d6;
+  background-color: #81A1C1;     /* azul nórdico para el seleccionado */
+  text-color:       #2E3440;     /* texto oscuro para contraste */
 }
+
 element-text.selected.normal {
-    background-color: #d6d6d6;
-    text-color:       black;
+  background-color: #81A1C1;
+  text-color:       #2E3440;
 }
 
 entry {
-    placeholder: "Start typing here!";
-    placeholder-color: gray;
-    background-color: #252525;
-    padding: 10px 15px;
-    text-color: white;
-    border-radius: 20px;
-    cursor-width: 0px;
+  placeholder: "Start typing here!";
+  placeholder-color: #88C0D0;    /* azul claro Nordic */
+  background-color: #4C566A;
+  padding: 10px 15px;
+  text-color: #ECEFF4;
+  border-radius: 20px;
+  cursor-width: 1px;
 }
