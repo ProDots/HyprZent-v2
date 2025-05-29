@@ -1,1 +1,79 @@
+# ~/.config/starship.toml (Nord Theme Optimizado)
+format = """
+[](#3B4252)\
+[  ](bg:#3B4252 fg:#D8DEE9)\
+[](bg:#5E81AC fg:#3B4252)\
+[  $directory ](bg:#5E81AC fg:#ECEFF4)\
+[](fg:#5E81AC bg:#2E3440)\
+[  $git_branch $git_status ](bg:#2E3440 fg:#81A1C1)\
+[](fg:#2E3440 bg:#3B4252)\
+[ $time $battery $cmd_duration ](bg:#3B4252 fg:#D8DEE9)\
+[](fg:#3B4252)
+$character
+"""
 
+# ===== MÓDULOS PRINCIPALES =====
+[character]
+success_symbol = "[❯](bold #A3BE8C)"
+error_symbol = "[✗](bold #BF616A)"
+vicmd_symbol = "[](bold #8FBCBB)"
+
+[directory]
+style = "bold #ECEFF4"
+truncation_length = 2
+read_only = "  "
+read_only_style = "fg:#BF616A"
+
+# ===== GIT (MEJORADO) =====
+[git_branch]
+symbol = ""
+style = "fg:#81A1C1"
+format = "[$symbol $branch]($style) "
+
+[git_status]
+style = "fg:#EBCB8B"
+format = "([$all_status]($style)) "
+conflicted = "═"
+ahead = "⇡${count} "
+behind = "⇣${count} "
+stashed = " "
+modified = " "
+untracked = " "
+
+# ===== TIEMPO (OPTIMIZADO) =====
+[time]
+disabled = false
+style = "fg:#D8DEE9"
+time_format = "%H:%M"
+format = " [$time]($style) "
+
+# ===== NUEVOS MÓDULOS (OPCIONALES) =====
+[battery]
+full_symbol = ""
+charging_symbol = ""
+discharging_symbol = ""
+format = "[$symbol $percentage]($style) "
+style = "fg:#A3BE8C"
+disabled = false  # Cambiar a 'true' si no usas laptop
+
+[cmd_duration]
+min_time = 2000  # Mostrar solo si >2 segundos
+format = "🕓 [$duration]($style) "
+style = "fg:#B48EAD"
+
+# ===== LENGUAJES =====
+[python]
+symbol = ""
+style = "fg:#8FBCBB"
+format = "[$symbol ($version)(\($virtualenv\))]($style) "
+
+[nodejs]
+symbol = ""
+style = "fg:#B48EAD"
+format = "[$symbol $version]($style) "
+
+[docker_context]
+symbol = ""
+style = "fg:#88C0D0"
+format = "[$symbol $context]($style) "
+disabled = true  # Activar si usas Docker
