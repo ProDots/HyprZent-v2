@@ -166,7 +166,7 @@
       (button :class { nighttoggle != false ? "testenabled" : "test"} :onclick {nighttoggle != false ? "wlsunset -t 0 & eww update nighttoggle=false" : "wlsunset -t 5200 -S 0:00 -s 0:00 & eww update nighttoggle=true"} "  ")
     )
     (box :spacing 10
-      (button :class "test" :onclick "eww open actioncenter --toggle && ~/.config/scripts/screensht area &" "󰹑  ")
+      (button :class "test" :onclick "eww open actioncenter --toggle; grim -g \"$(slurp)\" - | swappy -f - &" "󰹑  ")
       (button :class "test" :onclick "thunar ~ & eww open actioncenter --toggle &" " ")
       (button :class "test" :onclick "bash lightmode.sh" "")
     )
