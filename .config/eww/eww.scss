@@ -1,373 +1,200 @@
-/* NORDIC PRO - TRANSPARENT BASE - FINAL VERSION */
-
-:root {
-  --color-bg-dark: #2e3440;
-  --color-bg-medium: #3b4252;
-  --color-bg-light: #434c5e;
-  --color-text-light: #eceff4;
-  --color-text-dark: #2e3440;
-  --font-family-main: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
-}
-
-/* RESET GLOBAL */
 * {
   all: unset;
-  font-family: var(--font-family-main);
-  font-weight: 600;
+  font-family: "JetBrainsMono Nerd Font", "monospace";
+  font-size: 16px;
+  font-weight: 500;
+  transition: 200ms ease;
   box-sizing: border-box;
 }
 
-/* Revert reset para elementos form para mantener funcionalidad */
-button, input, select, textarea {
-  all: revert;
-  font-family: var(--font-family-main);
-  font-weight: 600;
-  box-sizing: border-box;
-  cursor: pointer;
-}
+// COLORES NORDIC PRO
+$background: rgba(46, 52, 64, 0.85);
+$background-alt: rgba(36, 41, 55, 0.75);
+$transparent: rgba(0, 0, 0, 0);
+$foreground: #ECEFF4;
+$secondary: #D8DEE9;
+$accent: #88C0D0;
+$green: #A3BE8C;
+$red: #BF616A;
+$yellow: #EBCB8B;
+$blue: #81A1C1;
+$purple: #B48EAD;
+$orange: #D08770;
 
-/* Accesibilidad: foco visible */
-button:focus, .workspaces button:focus, input:focus, select:focus, textarea:focus {
-  outline: 2px solid var(--color-text-light);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px var(--color-text-light);
-  border-radius: 6px;
-}
-
-/* === BAR BASE === */
-.bar {
-  background-color: transparent;
-  color: var(--color-text-light);
-  padding: 0;
-}
-
-/* === STRUCTURAL ALIGNMENTS === */
-.topstuff, .sidestuff {
-  padding: 0 10px;
-  margin: 0 5px;
-  min-height: 30px;
-  background-color: transparent;
-}
-
-/* === TIME === */
-.time {
-  margin: 0;
-  padding: 0 5px 0 10px;
-  border-radius: 50px;
-  font-weight: 500;
-  font-size: 15px;
-  min-height: 30px;
-  background-color: var(--color-bg-medium);
-}
-
-/* === METERS / CONNECTIVITY / MUSIC === */
-.meters, .connectivity, .music {
-  background-color: var(--color-bg-medium);
-  border-radius: 50px;
-  padding: 0 11px;
-  margin: 5px 0;
-  min-height: 30px;
-  font-weight: 500;
-}
-
-.meters {
-  padding: 0 15px;
-  margin-right: 5px;
-}
-
-.connectivity {
-  padding: 0 15px 0 12px;
-  margin-right: 5px;
-}
-
-.wifi {
-  margin-right: 6px;
-}
-
-/* === METRIC WIDGETS === */
-.metric label {
-  font-size: 14px;
-}
-
-/* === WORKSPACES === */
-.workspaces {
-  font-weight: 600;
-  background-color: var(--color-bg-medium);
-  border-radius: 50px;
-  margin: 5px 0;
-  padding: 0 3px;
-}
-
-.workspaces button {
-  padding: 0 7px;
-  margin: 4px 3px;
-  font-size: 15px;
-  border-radius: 50px;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.workspaces button.focused,
-.workspaces button:hover {
-  color: var(--color-bg-dark);
-  background-color: var(--color-text-light);
-}
-
-/* === LAUNCHER === */
-.launcher {
-  font-size: 20px;
-  padding: 0 10px 0 8px;
-  border-radius: 50px;
-  margin: 5px 10px 5px 0;
-  min-height: 30px;
-  color: var(--color-text-light);
-  background-color: var(--color-bg-medium);
-  cursor: pointer;
-}
-
-/* === POWER MENU === */
-.powermenu, .powerbuttons {
-  background-color: var(--color-bg-dark);
-  border-radius: 20px 20px 0 0;
-}
-
-.powermenu button {
-  transition: 0.2s;
-  color: var(--color-text-light);
-  padding: 6px 10px;
-  font-size: 17px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.powermenu button:hover {
-  background-color: #4c566a;
-}
-
-.sleep {
-  border-top-right-radius: 20px;
-}
-
-.poweroff {
-  border-top-left-radius: 20px;
-}
-
-/* === ACTION CENTER === */
-.actioncenter {
-  background-color: var(--color-bg-dark);
-  border-top-left-radius: 25px;
-  padding: 10px 10px 5px 10px;
-}
-
-/* Text weight helper */
-.topcenter {
-  font-weight: 500;
-}
-
-.middlecenter,
-.bottomcenter {
-  margin-top: 10px;
-  min-width: 230px;
-  border-radius: 20px;
-  padding: 10px;
-  background-color: var(--color-bg-medium);
-}
-
-/* === PROFILE / WELCOME === */
-.welcometext {
-  color: var(--color-text-light);
-  font-weight: 600;
-  font-size: 20px;
-}
-
-.pfp {
-  min-width: 100px;
-  min-height: 100px;
-  border-radius: 20px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* === SLIDERS (VOLUME / BRIGHTNESS) === */
-.scalecenter .scale,
-.scalecenter .trough,
-.scalecenter .highlight {
-  background-color: var(--color-text-light);
-  color: var(--color-bg-dark);
-  border-radius: 10px;
-  min-height: 10px;
-}
-
-.scalecenter .scale,
-.scalecenter .trough {
-  background-color: var(--color-bg-light);
-  border-radius: 50px;
-  min-height: 20px;
-  min-width: 225px;
-  margin-right: 5px;
-}
-
-.scalecenter label {
-  font-size: 18px;
-  color: var(--color-text-light);
-  margin: 0 15px 0 5px;
-}
-
-/* === CUSTOM BUTTONS === */
-.test, .testenabled {
-  min-width: 80px;
-  min-height: 50px;
-  background-color: var(--color-bg-light);
-  border-radius: 20px;
-  font-size: 20px;
-  color: var(--color-text-light);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.test:hover {
-  background-color: var(--color-text-light);
-  color: var(--color-bg-dark);
-}
-
-.testenabled {
-  background-color: var(--color-text-light);
-  color: var(--color-bg-dark);
-}
-
-/* === MUSIC PLAYER === */
-.musiccenter {
-  background-color: var(--color-bg-dark);
-  padding: 10px 10px 5px 10px;
-  border-radius: 25px 25px 0 0;
-  color: var(--color-text-light);
-}
-
-.musiccontrols {
-  background-color: var(--color-bg-medium);
-  min-width: 170px;
-  padding: 5px 20px;
-  border-radius: 20px;
-}
-
-.musicbutton {
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.musictitle {
-  margin-top: 5px;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.musicscale .scale,
-.musicscale .trough,
-.musicscale .highlight {
-  background-color: var(--color-text-light);
-  color: white;
-  border-radius: 10px;
-  min-height: 10px;
-}
-
-.musicscale .scale,
-.musicscale .trough {
-  background-color: var(--color-bg-light);
-  border-radius: 50px;
-  min-height: 10px;
-  min-width: 140px;
-  margin: 0 10px;
-}
-
-.musicscale label {
-  font-size: 13px;
-}
-
-/* === NOTIFICATIONS === */
-.notificationwidget {
-  background-color: var(--color-bg-dark);
-  border-radius: 25px 0 0 0;
-  padding: 10px 10px 5px 10px;
-  color: var(--color-text-light);
-}
-
-.notificationbox {
-  background-color: var(--color-bg-medium);
-  min-width: 200px;
-  padding: 15px;
-  border-radius: 20px;
-}
-
-.notificationicon {
-  font-size: 18px;
-  padding-right: 20px;
-  display: inline-block; /* para mejor control visual */
-}
-
-/* === CALENDAR === */
-.calendarcenter1 {
-  color: var(--color-text-light);
-  background-color: var(--color-bg-dark);
-  border-radius: 25px 0 0 0;
-  padding: 10px 10px 5px 10px;
-}
-
-.month {
-  margin: 0 0 10px 10px;
-  font-weight: 700;
-  font-size: 17px;
-}
-
-.calendar {
-  background-color: var(--color-bg-medium);
-  min-width: 255px;
-  min-height: 285px;
-  padding: 10px;
-  border-radius: 20px;
-}
-
-.calendardays label {
-  margin: -10px -10px;
-}
-
-.currentday,
-.calendardays label:hover {
-  border-radius: 20px;
-  color: var(--color-bg-dark);
-  background-color: var(--color-text-light);
-}
-
-.invalidday {
-  color: #616e88;
-}
-
-.daynames label {
-  margin: 0 -10px;
-}
-
-/* === NOTIFICATION HISTORY === */
-.notificationhistory {
-  color: var(--color-text-light);
-  background-color: var(--color-bg-dark);
-  min-width: 255px;
-  padding: 10px;
-  border-radius: 25px 0 0 25px;
-}
-
-.notifscroll {
-  min-height: 326px;
-}
-
-.notificationhistory button {
-  background-color: var(--color-bg-medium);
+// ELEMENTOS BÁSICOS
+.bg {
+  background-color: $background;
+  border-radius: 16px;
   padding: 8px;
-  border-radius: 20px;
-  font-size: 15px;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
+  color: $foreground;
 }
 
-.notificationhistory button:hover {
-  background-color: #4c566a;
+.bg-alt {
+  background-color: $background-alt;
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.transparent {
+  background-color: $transparent;
+}
+
+// BAR
+.bar {
+  @extend .bg;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+// WIDGETS INTERNOS
+.widget {
+  margin: 4px;
+  padding: 6px 10px;
+  background-color: rgba(76, 86, 106, 0.5);
+  border-radius: 10px;
+
+  &:hover {
+    background-color: $accent;
+    color: $background;
+  }
+}
+
+// ACTION CENTER
+.actioncenter {
+  @extend .bg;
+  min-width: 300px;
+  padding: 10px;
+
+  .header {
+    font-size: 16px;
+    font-weight: bold;
+    color: $accent;
+    margin-bottom: 8px;
+  }
+
+  .toggle {
+    padding: 6px;
+    background-color: rgba(76, 86, 106, 0.6);
+    border-radius: 10px;
+
+    &:hover {
+      background-color: $blue;
+    }
+  }
+}
+
+// NOTIFICATION WIDGET
+.notificationwidget {
+  @extend .bg;
+  padding: 12px;
+  max-width: 350px;
+
+  .notif-title {
+    font-weight: bold;
+    color: $blue;
+    margin-bottom: 6px;
+  }
+
+  .notif-body {
+    color: $secondary;
+  }
+}
+
+// POWER MENU
+.powermenu {
+  @extend .bg;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .power-btn {
+    margin: 8px;
+    padding: 12px;
+    border-radius: 14px;
+    background-color: rgba(76, 86, 106, 0.5);
+
+    &:hover {
+      background-color: $red;
+      color: $background;
+    }
+  }
+
+  .hint {
+    margin-top: 10px;
+    color: $green;
+    font-size: 12px;
+  }
+}
+
+// INDICADORES Y BADGES
+.indicator {
+  background-color: $green;
+  color: $background;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+// SLIDERS (VOL/BRIGHTNESS)
+.slider {
+  background-color: $background-alt;
+  border-radius: 10px;
+  height: 6px;
+
+  .highlight {
+    background-color: $accent;
+    border-radius: 10px;
+  }
+}
+
+// ICONOS
+.icon {
+  padding: 4px;
+  background-color: rgba(76, 86, 106, 0.5);
+  border-radius: 10px;
+
+  &:hover {
+    background-color: $yellow;
+  }
+}
+
+// ──────────────────────────────
+// TIRAMISÚ (SECCIÓN FINAL)
+// ──────────────────────────────
+
+.tiramisu {
+  background-color: rgba(76, 86, 106, 0.6);
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin: 12px 0;
+  color: $foreground;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: $purple;
+  }
+
+  .description {
+    font-size: 14px;
+    color: $secondary;
+  }
+
+  .button {
+    margin-top: 8px;
+    padding: 6px 12px;
+    background-color: $accent;
+    color: $background;
+    border-radius: 10px;
+    text-align: center;
+
+    &:hover {
+      background-color: $blue;
+    }
+  }
 }
