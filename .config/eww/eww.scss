@@ -1,35 +1,82 @@
 /* NORDIC PRO - TRANSPARENT BASE - FINAL VERSION */
 
-* {
-  all: unset;
-  font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
-  font-weight: 600;
+:root {
+  --color-bg-dark: #2e3440;
+  --color-bg-medium: #3b4252;
+  --color-bg-light: #434c5e;
+  --color-text-light: #eceff4;
+  --color-text-dark: #2e3440;
+  --font-family-main: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
 }
 
-/* Transparent global bar container */
+/* RESET GLOBAL */
+* {
+  all: unset;
+  font-family: var(--font-family-main);
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+/* Revert reset para elementos form para mantener funcionalidad */
+button, input, select, textarea {
+  all: revert;
+  font-family: var(--font-family-main);
+  font-weight: 600;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* Accesibilidad: foco visible */
+button:focus, .workspaces button:focus, input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--color-text-light);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px var(--color-text-light);
+  border-radius: 6px;
+}
+
+/* === BAR BASE === */
 .bar {
   background-color: transparent;
-  color: #eceff4;
+  color: var(--color-text-light);
   padding: 0;
 }
 
-/* Nordic modules */
-.meters, .music, .connectivity {
-  background-color: #3b4252;
+/* === STRUCTURAL ALIGNMENTS === */
+.topstuff, .sidestuff {
+  padding: 0 10px;
+  margin: 0 5px;
+  min-height: 30px;
+  background-color: transparent;
+}
+
+/* === TIME === */
+.time {
+  margin: 0;
+  padding: 0 5px 0 10px;
   border-radius: 50px;
-  padding: 0px 11px;
-  margin: 5px 0px;
+  font-weight: 500;
+  font-size: 15px;
+  min-height: 30px;
+  background-color: var(--color-bg-medium);
+}
+
+/* === METERS / CONNECTIVITY / MUSIC === */
+.meters, .connectivity, .music {
+  background-color: var(--color-bg-medium);
+  border-radius: 50px;
+  padding: 0 11px;
+  margin: 5px 0;
   min-height: 30px;
   font-weight: 500;
 }
 
 .meters {
-  padding: 0px 15px;
+  padding: 0 15px;
   margin-right: 5px;
 }
 
 .connectivity {
-  padding: 0px 15px 0px 12px;
+  padding: 0 15px 0 12px;
   margin-right: 5px;
 }
 
@@ -37,68 +84,64 @@
   margin-right: 6px;
 }
 
-.sidestuff slider {
-  all: unset;
-}
-
+/* === METRIC WIDGETS === */
 .metric label {
   font-size: 14px;
 }
 
-.time {
-  margin: 0px;
-  padding: 0px 5px 0px 10px;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  font-weight: 500;
-  font-size: 15px;
-  min-height: 30px;
-  background-color: #3b4252;
-}
-
+/* === WORKSPACES === */
 .workspaces {
   font-weight: 600;
-  background-color: #3b4252;
+  background-color: var(--color-bg-medium);
   border-radius: 50px;
-  margin: 5px 0px;
-  padding: 0px 3px;
+  margin: 5px 0;
+  padding: 0 3px;
 }
 
 .workspaces button {
-  padding: 0px 7px;
+  padding: 0 7px;
   margin: 4px 3px;
   font-size: 15px;
   border-radius: 50px;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .workspaces button.focused,
 .workspaces button:hover {
-  color: #2e3440;
-  background-color: #eceff4;
+  color: var(--color-bg-dark);
+  background-color: var(--color-text-light);
 }
 
+/* === LAUNCHER === */
 .launcher {
   font-size: 20px;
-  padding: 0px 10px 0px 8px;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-  margin: 5px 10px 5px 0px;
+  padding: 0 10px 0 8px;
+  border-radius: 50px;
+  margin: 5px 10px 5px 0;
   min-height: 30px;
-  color: #eceff4;
-  background-color: #3b4252;
+  color: var(--color-text-light);
+  background-color: var(--color-bg-medium);
+  cursor: pointer;
 }
 
-/* Power Menu */
-.powermenu {
-  background-color: #2e3440;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+/* === POWER MENU === */
+.powermenu, .powerbuttons {
+  background-color: var(--color-bg-dark);
+  border-radius: 20px 20px 0 0;
 }
 
 .powermenu button {
   transition: 0.2s;
-  color: #eceff4;
+  color: var(--color-text-light);
+  padding: 6px 10px;
+  font-size: 17px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.powermenu button:hover {
+  background-color: #4c566a;
 }
 
 .sleep {
@@ -109,17 +152,14 @@
   border-top-left-radius: 20px;
 }
 
-.powermenu button:hover {
-  background-color: #4c566a;
-}
-
-/* Action Center */
+/* === ACTION CENTER === */
 .actioncenter {
-  background-color: #2e3440;
+  background-color: var(--color-bg-dark);
   border-top-left-radius: 25px;
   padding: 10px 10px 5px 10px;
 }
 
+/* Text weight helper */
 .topcenter {
   font-weight: 500;
 }
@@ -130,18 +170,17 @@
   min-width: 230px;
   border-radius: 20px;
   padding: 10px;
-  background-color: #3b4252;
+  background-color: var(--color-bg-medium);
 }
 
-/* Welcome / Profile / Music Art */
+/* === PROFILE / WELCOME === */
 .welcometext {
-  color: #eceff4;
+  color: var(--color-text-light);
   font-weight: 600;
   font-size: 20px;
 }
 
-.pfp,
-.musicart {
+.pfp {
   min-width: 100px;
   min-height: 100px;
   border-radius: 20px;
@@ -150,21 +189,19 @@
   background-position: center;
 }
 
-.musicart {
-  border: 2px solid #3b4252;
-  background-image: unset;
-}
-
-/* Volume and Brightness Sliders */
-.scalecenter scale trough highlight {
-  background-color: #eceff4;
-  color: #2e3440;
+/* === SLIDERS (VOLUME / BRIGHTNESS) === */
+.scalecenter .scale,
+.scalecenter .trough,
+.scalecenter .highlight {
+  background-color: var(--color-text-light);
+  color: var(--color-bg-dark);
   border-radius: 10px;
   min-height: 10px;
 }
 
-.scalecenter scale trough {
-  background-color: #434c5e;
+.scalecenter .scale,
+.scalecenter .trough {
+  background-color: var(--color-bg-light);
   border-radius: 50px;
   min-height: 20px;
   min-width: 225px;
@@ -173,42 +210,42 @@
 
 .scalecenter label {
   font-size: 18px;
-  color: #eceff4;
-  margin: 0px 15px 0px 5px;
+  color: var(--color-text-light);
+  margin: 0 15px 0 5px;
 }
 
-/* Custom Buttons */
-.test,
-.testenabled {
+/* === CUSTOM BUTTONS === */
+.test, .testenabled {
   min-width: 80px;
   min-height: 50px;
-  background-color: #434c5e;
+  background-color: var(--color-bg-light);
   border-radius: 20px;
   font-size: 20px;
-  color: #eceff4;
+  color: var(--color-text-light);
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .test:hover {
-  background-color: #eceff4;
-  color: #2e3440;
+  background-color: var(--color-text-light);
+  color: var(--color-bg-dark);
 }
 
 .testenabled {
-  background-color: #eceff4;
-  color: #2e3440;
+  background-color: var(--color-text-light);
+  color: var(--color-bg-dark);
 }
 
-/* Music Player */
+/* === MUSIC PLAYER === */
 .musiccenter {
-  background-color: #2e3440;
+  background-color: var(--color-bg-dark);
   padding: 10px 10px 5px 10px;
-  border-radius: 25px 25px 0px 0px;
-  color: #eceff4;
+  border-radius: 25px 25px 0 0;
+  color: var(--color-text-light);
 }
 
 .musiccontrols {
-  background-color: #3b4252;
+  background-color: var(--color-bg-medium);
   min-width: 170px;
   padding: 5px 20px;
   border-radius: 20px;
@@ -216,6 +253,7 @@
 
 .musicbutton {
   font-size: 20px;
+  cursor: pointer;
 }
 
 .musictitle {
@@ -224,35 +262,38 @@
   font-weight: 600;
 }
 
-.musicscale scale trough highlight {
-  background-color: #eceff4;
+.musicscale .scale,
+.musicscale .trough,
+.musicscale .highlight {
+  background-color: var(--color-text-light);
   color: white;
   border-radius: 10px;
   min-height: 10px;
 }
 
-.musicscale scale trough {
-  background-color: #434c5e;
+.musicscale .scale,
+.musicscale .trough {
+  background-color: var(--color-bg-light);
   border-radius: 50px;
   min-height: 10px;
   min-width: 140px;
-  margin: 0px 10px;
+  margin: 0 10px;
 }
 
 .musicscale label {
   font-size: 13px;
 }
 
-/* Notifications */
+/* === NOTIFICATIONS === */
 .notificationwidget {
-  background-color: #2e3440;
-  border-radius: 25px 0px 0px 0px;
+  background-color: var(--color-bg-dark);
+  border-radius: 25px 0 0 0;
   padding: 10px 10px 5px 10px;
-  color: #eceff4;
+  color: var(--color-text-light);
 }
 
 .notificationbox {
-  background-color: #3b4252;
+  background-color: var(--color-bg-medium);
   min-width: 200px;
   padding: 15px;
   border-radius: 20px;
@@ -261,29 +302,25 @@
 .notificationicon {
   font-size: 18px;
   padding-right: 20px;
+  display: inline-block; /* para mejor control visual */
 }
 
-.summary {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-/* Calendar */
+/* === CALENDAR === */
 .calendarcenter1 {
-  color: #eceff4;
-  background-color: #2e3440;
-  border-radius: 25px 0px 0px 0px;
+  color: var(--color-text-light);
+  background-color: var(--color-bg-dark);
+  border-radius: 25px 0 0 0;
   padding: 10px 10px 5px 10px;
 }
 
 .month {
-  margin: 0px 0px 10px 10px;
+  margin: 0 0 10px 10px;
   font-weight: 700;
   font-size: 17px;
 }
 
 .calendar {
-  background-color: #3b4252;
+  background-color: var(--color-bg-medium);
   min-width: 255px;
   min-height: 285px;
   padding: 10px;
@@ -297,8 +334,8 @@
 .currentday,
 .calendardays label:hover {
   border-radius: 20px;
-  color: #2e3440;
-  background-color: #eceff4;
+  color: var(--color-bg-dark);
+  background-color: var(--color-text-light);
 }
 
 .invalidday {
@@ -306,16 +343,16 @@
 }
 
 .daynames label {
-  margin: 0px -10px;
+  margin: 0 -10px;
 }
 
-/* Notification History */
+/* === NOTIFICATION HISTORY === */
 .notificationhistory {
-  color: #eceff4;
-  background-color: #2e3440;
+  color: var(--color-text-light);
+  background-color: var(--color-bg-dark);
   min-width: 255px;
   padding: 10px;
-  border-radius: 25px 0px 0px 25px;
+  border-radius: 25px 0 0 25px;
 }
 
 .notifscroll {
@@ -323,9 +360,14 @@
 }
 
 .notificationhistory button {
-  background-color: #3b4252;
+  background-color: var(--color-bg-medium);
   padding: 8px;
   border-radius: 20px;
   font-size: 15px;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.notificationhistory button:hover {
+  background-color: #4c566a;
 }
