@@ -1,3 +1,13 @@
+;; ================= CONFIGURACIÓN PRINCIPAL EWW =================
+;; ======= VARIABLES GLOBALES =======
+(defvar ismusicopenornot false)
+(defvar is_muted "false")
+(defvar notificationreveal false)
+(defvar notification '{"summary":"", "body":"", "source":"", "icon":""}')
+(defvar notifid "0")
+(defvar nighttoggle false)
+
+;; ======= WIDGETS PRINCIPALES =======
 (defwidget bar []
   (centerbox :orientation "h"
     (topstuff)
@@ -6,26 +16,55 @@
   )
 )
 
-(defwindow powermenu
-  :monitor 0
-  :exclusive false
-  :windowtype "normal"
-  :stacking "fg"
-  :geometry (geometry :x "55" :y "0" :width "150px" :height "40px" :anchor "bottom right")
-  :reserve (struts :side "right" :distance "4%")
-  (box :class "powerbuttons"
-    (button :class "poweroff" :onclick "systemctl poweroff &" "")
-    (button :class "restart" :onclick "systemctl reboot &" "")
-    (button :class "sleep" :onclick "eww close powermenu; systemctl suspend &" "")
+(defwidget topstuff []
+  (box :class "topstuff" :orientation "h" :space-evenly false
+    (launcher)
+    (workspaces :array workspacesArray)
   )
 )
 
-;; ======= VARIABLES CRÍTICAS DEFINIDAS =======
-(defpoll volume :interval "1s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}'")
-(defvar ismusicopenornot false)
-(defvar is_muted "false")
-;; ============================================
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (notification-indicator)
+    (meters)
+    (connectivity)
+    (time)
+  )
+)
 
+;; ======= WIDGETS DE NOTIFICACIONES =======
+(defwidget notification-indicator []
+  (button :class "notification-indicator"
+          :onclick "eww open notificationwidget --toggle"
+          {notification.summary != "" ? "" : ""}
+  )
+)
+
+(defwindow notificationwidget
+  :monitor 0
+  :exclusive true
+  :windowtype "dialog"
+  :stacking "fg"
+  :geometry (geometry :x "0" :y "0" :width "300px" :height "auto" :anchor "top right")
+  :reserve (struts :side "right" :distance "4%")
+  (revealer :transition "slideup" :duration "500ms" :reveal notificationreveal
+    (box :orientation "v" :class "notification-container" :spacing 5
+      (box :class "notificationbox" :orientation "h" :spacing 10
+        (label :class "notificationicon" 
+               :text {notification.source == "Spotify" ? "" :
+                      notification.source == "PIPEWIRE" ? "󰋋" :
+                      notification.source == "firefox" ? "󰈹" : ""}
+               :halign "start" :valign "center")
+        (box :orientation "v" :spacing 5
+          (label :class "summary" :text "${notification.summary}" :halign "start" :wrap true)
+          (label :class "body" :text "${notification.body}" :halign "start" :wrap true)
+        )
+      )
+    )
+  )
+)
+
+;; ======= WIDGETS DEL SISTEMA =======
 (defwidget meters []
   (box :class "meters" :orientation "h" :halign "end" :spacing 12 :space-evenly false
     (metric :label "󰍛" :value "󱃃 ${temp}C" :onchange "" :onclick "")
@@ -49,28 +88,17 @@
   )
 )
 
+;; ======= WIDGETS DE MÚSICA =======
+(defwidget music []
+  (button :class "music" :halign "center" :style { music == "" ? "background-color:transparent" : ""}
+    :onclick {ismusicopenornot ? "eww close musiccenter & eww update ismusicopenornot=false" :
+              "eww open musiccenter & eww update ismusicopenornot=true"}
+    {music == "" ? "" : "  ${music}"}
+  )
+)
+
+;; ======= WIDGETS DE WORKSPACES =======
 (deflisten workspacesArray :initial "[1]" "~/.config/eww/scripts/getWorkspaces.sh")
-
-(defwidget topstuff []
-  (box :class "topstuff" :orientation "h" :space-evenly false
-    (launcher)
-    (workspaces :array workspacesArray)
-  )
-)
-
-(defwidget sidestuff []
-  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (meters)
-    (connectivity)
-    (time)
-  )
-)
-
-(defwidget launcher []
-  (button :class "launcher" 
-    :onclick "pidof rofi >/dev/null && killall rofi || rofi -show drun -theme ~/.config/rofi/config.rasi &"
-    "")
-)
 
 (defwidget workspaces [array]
   (box :class "workspaces" :orientation "h" :space-evenly false :spacing 1 :halign "start"
@@ -84,24 +112,23 @@
   )
 )
 
-(defwidget music []
-  (button :class "music" :halign "center" :style { music == "" ? "background-color:transparent" : ""}
-    :onclick {ismusicopenornot ? "eww close musiccenter & eww update ismusicopenornot=false" :
-              "eww open musiccenter & eww update ismusicopenornot=true"}
-    {music == "" ? "" : "  ${music}"}
+;; ======= WIDGETS DE LAUNCHER =======
+(defwidget launcher []
+  (button :class "launcher" 
+    :onclick "pidof rofi >/dev/null && killall rofi || rofi -show drun -theme ~/.config/rofi/config.rasi &"
+    "")
+)
+
+;; ======= WIDGETS DE TIEMPO =======
+(defwidget time []
+  (box :class "time" :orientation "h" :space-evenly false :valign "center"
+    (button :onclick "eww open actioncenter --toggle"
+      :onrightclick "eww open calendarcenter --toggle"
+      "${hours}:${minutes} ${pmoram}")
   )
 )
 
-(defwidget metric [label value onchange onclick]
-  (box :orientation "h" :class "metric" :space-evenly false
-    (button :onclick {onclick} {value})
-  )
-)
-
-(defpoll username :interval "100s" "whoami")
-(defpoll hostname :interval "100s" "cat /etc/hostname")
-(defpoll uptime :interval "60s" "uptime -p | sed 's/up //'")
-
+;; ======= WIDGETS DE ACCIÓN CENTER =======
 (defwidget topcenter []
   (box :class "topcenter" :orientation "h" :halign "start" :spacing 10 :space-evenly false
     (image :class "pfp" :valign "start"
@@ -148,6 +175,25 @@
   )
 )
 
+(defwidget metric [label value onchange onclick]
+  (box :orientation "h" :class "metric" :space-evenly false
+    (button :onclick {onclick} {value})
+  )
+)
+
+;; ======= VENTANAS PRINCIPALES =======
+(defwindow bar
+  :monitor 0
+  :exclusive true
+  :focusable false
+  :windowtype "normal"
+  :stacking "fg"
+  :geometry (geometry :x "0" :y "0" :width "100%" :height "40px" :anchor "top center")
+  :reserve (struts :side "top" :distance "40px")
+  (bar)
+  (on-startup "killall tiramisupipe.sh 2>/dev/null; ~/.config/eww/scripts/tiramisupipe.sh &")
+)
+
 (defwindow actioncenter
   :monitor 0
   :exclusive false
@@ -162,14 +208,25 @@
   )
 )
 
-(defwidget time []
-  (box :class "time" :orientation "h" :space-evenly false :valign "center"
-    (button :onclick "eww open actioncenter --toggle"
-      :onrightclick "eww open calendarcenter --toggle"
-      "${hours}:${minutes} ${pmoram}")
+(defwindow powermenu
+  :monitor 0
+  :exclusive false
+  :windowtype "normal"
+  :stacking "fg"
+  :geometry (geometry :x "55" :y "0" :width "150px" :height "40px" :anchor "bottom right")
+  :reserve (struts :side "right" :distance "4%")
+  (box :class "powerbuttons"
+    (button :class "poweroff" :onclick "systemctl poweroff &" "")
+    (button :class "restart" :onclick "systemctl reboot &" "")
+    (button :class "sleep" :onclick "eww close powermenu; systemctl suspend &" "")
   )
 )
 
+;; ======= POLLS Y LISTENERS =======
+(defpoll volume :interval "1s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}'")
+(defpoll username :interval "100s" "whoami")
+(defpoll hostname :interval "100s" "cat /etc/hostname")
+(defpoll uptime :interval "60s" "uptime -p | sed 's/up //'")
 (defpoll hours :interval "1s" "date +%I")
 (defpoll minutes :interval "1s" "date +%M")
 (defpoll pmoram :interval "1s" "date +%p")
@@ -181,40 +238,7 @@
 (defpoll bluetoothstatus :interval "5s" "bluetoothctl show | grep -q 'Powered: yes' && echo 'yes' || echo 'no'")
 (defpoll music :interval "1s" "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo ''")
 
-(defwindow notificationwidget
-  :monitor 0
-  :exclusive true
-  :windowtype "dialog"
-  :stacking "fg"
-  :geometry (geometry :x "0" :y "0" :width "300px" :height "80px" :anchor "top right")
-  :reserve (struts :side "right" :distance "4%")
-  (revealer :transition "slideup" :duration "500ms" :reveal notificationreveal
-    (box :orientation "h" :space-evenly false
-      (box :orientation "v" :space-evenly false :valign "center" :class "notificationbox"
-        (box :spacing 10 :space-evenly false
-          (label :class "summary" :text "${notification.summary}" :halign "start")
-          (label :class "notificationicon" :text {notification.source == "Spotify" ? "" :
-                notification.source == "PIPEWIRE" ? "󰋋" :
-                notification.source == "firefox" ? "󰈹" : ""}
-                :halign "start")
-        )
-        (label :class "body" :text "${notification.body}" :halign "start")
-      )
-    )
-  )
-)
-
-(defwindow bar
-  :monitor 0
-  :exclusive true
-  :focusable false
-  :windowtype "normal"
-  :stacking "fg"
-  :geometry (geometry :x "0" :y "0" :width "100%" :height "40px" :anchor "top center")
-  :reserve (struts :side "top" :distance "40px")
-  (bar)
-)
-
+;; ======= INCLUDES =======
 (include "./music_center.yuck")
 (include "./calendar.yuck")
 (include "./variables.yuck")
