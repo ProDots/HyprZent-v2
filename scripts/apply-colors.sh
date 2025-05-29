@@ -305,6 +305,5 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# If no specific action (like --rollback, --preview, --version, --export) caused an exit,
-# then proceed with the main application logic.
-main
+# Si ninguna acción específica (como --rollback, --preview, --version, --export) provocó la salida,
+# entonces continúe con la lógica principal de la aplicación main
