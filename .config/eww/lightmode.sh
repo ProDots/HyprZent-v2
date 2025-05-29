@@ -1,30 +1,49 @@
 #!/bin/bash
 
-FILE=~/.config/eww/lightlock
-if [ -f "$FILE" ]; then
-    sed -i -e 's/#e2e2e2/#252525/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    sed -i -e 's/#d3d3d3/#1a1a1a/g' ~/.config/eww/eww.scss
-    sed -i -e 's/#f5f5f5/#111111/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
+flag="$HOME/.config/eww/lightlock"
+eww_file="$HOME/.config/eww/eww.scss"
+rofi_file="$HOME/.config/rofi/config.rasi"
 
-    sed -i -e 's/white/DUMMY/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    sed -i -e 's/black/white/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    sed -i -e 's/DUMMY/black/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
+if [ -f "$flag" ]; then
+    [ -f "$eww_file" ] && sed -i -e 's/#e2e2e2/#252525/g' "$eww_file"
+    [ -f "$rofi_file" ] && sed -i -e 's/#e2e2e2/#252525/g' "$rofi_file"
 
-    sed -i -e 's/#c5c5c5/#1b1b1b/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    sed -i -e 's/#464646/#d6d6d6/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    rm $FILE
-    pkill dunst && pkill rofi
+    [ -f "$eww_file" ] && sed -i -e 's/#d3d3d3/#1a1a1a/g' "$eww_file"
+
+    [ -f "$eww_file" ] && sed -i -e 's/#f5f5f5/#111111/g' "$eww_file"
+    [ -f "$rofi_file" ] && sed -i -e 's/#f5f5f5/#111111/g' "$rofi_file"
+
+    for file in "$eww_file" "$rofi_file"; do
+        [ -f "$file" ] && sed -i -e 's/white/DUMMY/g' -e 's/black/white/g' -e 's/DUMMY/black/g' "$file"
+    done
+
+    [ -f "$eww_file" ] && sed -i -e 's/#c5c5c5/#1b1b1b/g' "$eww_file"
+    [ -f "$rofi_file" ] && sed -i -e 's/#c5c5c5/#1b1b1b/g' "$rofi_file"
+
+    [ -f "$eww_file" ] && sed -i -e 's/#464646/#d6d6d6/g' "$eww_file"
+    [ -f "$rofi_file" ] && sed -i -e 's/#464646/#d6d6d6/g' "$rofi_file"
+
+    rm -f "$flag"
 else
-    sed -i -e 's/#111111/#f5f5f5/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    sed -i -e 's/#1a1a1a/#d3d3d3/g' ~/.config/eww/eww.scss
-    sed -i -e 's/#252525/#e2e2e2/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
+    [ -f "$eww_file" ] && sed -i -e 's/#111111/#f5f5f5/g' "$eww_file"
+    [ -f "$rofi_file" ] && sed -i -e 's/#111111/#f5f5f5/g' "$rofi_file"
 
-    sed -i -e 's/white/DUMMY/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    sed -i -e 's/black/white/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    sed -i -e 's/DUMMY/black/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
+    [ -f "$eww_file" ] && sed -i -e 's/#1a1a1a/#d3d3d3/g' "$eww_file"
 
-    sed -i -e 's/#1b1b1b/#c5c5c5/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    sed -i -e 's/#d6d6d6/#464646/g' ~/.config/eww/eww.scss ~/.config/rofi/config.rasi ~/.config/dunst/dunstrc
-    touch $FILE
-    pkill dunst && pkill rofi
+    [ -f "$eww_file" ] && sed -i -e 's/#252525/#e2e2e2/g' "$eww_file"
+    [ -f "$rofi_file" ] && sed -i -e 's/#252525/#e2e2e2/g' "$rofi_file"
+
+    for file in "$eww_file" "$rofi_file"; do
+        [ -f "$file" ] && sed -i -e 's/white/DUMMY/g' -e 's/black/white/g' -e 's/DUMMY/black/g' "$file"
+    done
+
+    [ -f "$eww_file" ] && sed -i -e 's/#1b1b1b/#c5c5c5/g' "$eww_file"
+    [ -f "$rofi_file" ] && sed -i -e 's/#1b1b1b/#c5c5c5/g' "$rofi_file"
+
+    [ -f "$eww_file" ] && sed -i -e 's/#d6d6d6/#464646/g' "$eww_file"
+    [ -f "$rofi_file" ] && sed -i -e 's/#d6d6d6/#464646/g' "$rofi_file"
+
+    touch "$flag"
 fi
+
+pkill rofi
