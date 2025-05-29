@@ -1,0 +1,17 @@
+[Default]
+save_dir=$HOME/Pictures
+save_filename_format=screenshot-%Y%m%d-%H%M%S.png
+line_size=3
+text_size=20
+text_font=sans
+mode=brush
+
+# Nord colors (consistente con otros tools)
+color=D8DEE9
+background=2E3440
+text_color=ECEFF4
+selection_color=4C566A
+
+[shortcuts]
+toggle_help=H
+change_mode=B
