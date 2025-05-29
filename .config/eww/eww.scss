@@ -1,20 +1,21 @@
+/* NORDIC PRO - TRANSPARENT BASE - FINAL VERSION */
 
 * {
-  all: unset; //Unsets everything so you can style everything from scratch
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
   font-weight: 600;
 }
 
-//Global Styles
+/* Transparent global bar container */
 .bar {
-  background-color: #111111;
-  color: white;
-  padding: 0px 0px 0px 0px;
+  background-color: transparent;
+  color: #eceff4;
+  padding: 0;
 }
 
-// Styles on classes (see eww.yuck for more information)
-
-.meters, .music, .connectivity{
-  background-color: #252525;
+/* Nordic modules */
+.meters, .music, .connectivity {
+  background-color: #3b4252;
   border-radius: 50px;
   padding: 0px 11px;
   margin: 5px 0px;
@@ -22,32 +23,29 @@
   font-weight: 500;
 }
 
-.meters{
+.meters {
   padding: 0px 15px;
   margin-right: 5px;
 }
-.connectivity{
+
+.connectivity {
   padding: 0px 15px 0px 12px;
   margin-right: 5px;
 }
-.wifi{
+
+.wifi {
   margin-right: 6px;
 }
 
 .sidestuff slider {
   all: unset;
-  color: #c57a6b;
 }
 
-.metric{
-  margin: 0px;
-  padding: 0px;
-}
-.metric label{
+.metric label {
   font-size: 14px;
 }
 
-.time{
+.time {
   margin: 0px;
   padding: 0px 5px 0px 10px;
   border-top-left-radius: 50px;
@@ -55,91 +53,95 @@
   font-weight: 500;
   font-size: 15px;
   min-height: 30px;
-  background-color: #252525;
+  background-color: #3b4252;
 }
 
-.workspaces{
+.workspaces {
   font-weight: 600;
-  background-color: #252525;
+  background-color: #3b4252;
   border-radius: 50px;
   margin: 5px 0px;
   padding: 0px 3px;
 }
 
-.workspaces button{
-  padding: 0px 7px 0px 7px;
-  margin: 4px 3px 4px 3px;
+.workspaces button {
+  padding: 0px 7px;
+  margin: 4px 3px;
   font-size: 15px;
   border-radius: 50px;
+  transition: all 0.2s ease-in-out;
 }
 
-.workspaces button.focused, .workspaces button:hover {
-  color: rgb(0, 0, 0);
-  background-color: rgb(245, 245, 245);
+.workspaces button.focused,
+.workspaces button:hover {
+  color: #2e3440;
+  background-color: #eceff4;
 }
 
 .launcher {
   font-size: 20px;
-  padding: 0px 10px 0px 8px; 
-  border-top-right-radius: 50px; 
+  padding: 0px 10px 0px 8px;
+  border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   margin: 5px 10px 5px 0px;
   min-height: 30px;
-  color: white;
-  background-color: #252525;
+  color: #eceff4;
+  background-color: #3b4252;
 }
 
-.powermenu{
-  background-color: #111111;
+/* Power Menu */
+.powermenu {
+  background-color: #2e3440;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
-.powermenu button{
+
+.powermenu button {
   transition: 0.2s;
-  color:white;
+  color: #eceff4;
 }
-.sleep{
+
+.sleep {
   border-top-right-radius: 20px;
 }
-.poweroff{
+
+.poweroff {
   border-top-left-radius: 20px;
-
-}
-.powermenu button:hover{
-  background-color: #252525;
 }
 
-.actioncenter{
-  background-color: #111111;
+.powermenu button:hover {
+  background-color: #4c566a;
+}
+
+/* Action Center */
+.actioncenter {
+  background-color: #2e3440;
   border-top-left-radius: 25px;
   padding: 10px 10px 5px 10px;
 }
 
-.topcenter{
+.topcenter {
   font-weight: 500;
 }
-.middlecenter{
+
+.middlecenter,
+.bottomcenter {
   margin-top: 10px;
   min-width: 230px;
   border-radius: 20px;
   padding: 10px;
-  background-color: #252525;
-}
-.bottomcenter{
-  margin-top: 10px;
-  min-width: 230px;
-  padding: 10px;
-  background-color: #252525;
-  border-radius: 20px;
+  background-color: #3b4252;
 }
 
-.welcometext{
-  color: white;
+/* Welcome / Profile / Music Art */
+.welcometext {
+  color: #eceff4;
   font-weight: 600;
   font-size: 20px;
 }
 
-.pfp, .musicart {
+.pfp,
+.musicart {
   min-width: 100px;
   min-height: 100px;
   border-radius: 20px;
@@ -148,164 +150,182 @@
   background-position: center;
 }
 
-.scalecenter scale trough highlight {
-  all: unset;
-  background-color: #d6d6d6;
-  color: #000000;
-  border-radius: 10px;
+.musicart {
+  border: 2px solid #3b4252;
+  background-image: unset;
 }
+
+/* Volume and Brightness Sliders */
+.scalecenter scale trough highlight {
+  background-color: #eceff4;
+  color: #2e3440;
+  border-radius: 10px;
+  min-height: 10px;
+}
+
 .scalecenter scale trough {
-  all: unset;
-  background-color: #1a1a1a;
+  background-color: #434c5e;
   border-radius: 50px;
   min-height: 20px;
   min-width: 225px;
   margin-right: 5px;
 }
-.scalecenter label{
+
+.scalecenter label {
   font-size: 18px;
-  color:white;
+  color: #eceff4;
   margin: 0px 15px 0px 5px;
 }
 
-.test, .testenabled{
+/* Custom Buttons */
+.test,
+.testenabled {
   min-width: 80px;
   min-height: 50px;
-  background-color: #1a1a1a;
+  background-color: #434c5e;
   border-radius: 20px;
   font-size: 20px;
-  color: white;
-  transition: 0.3s;
+  color: #eceff4;
+  transition: all 0.3s ease-in-out;
 }
 
-.test:hover{
-  background-color: #d6d6d6;
-  color: black;
+.test:hover {
+  background-color: #eceff4;
+  color: #2e3440;
 }
 
-.testenabled{
-  background-color: #d6d6d6;
-  color: black;
+.testenabled {
+  background-color: #eceff4;
+  color: #2e3440;
 }
 
-.musiccenter{
-  background-color: #111111;
+/* Music Player */
+.musiccenter {
+  background-color: #2e3440;
   padding: 10px 10px 5px 10px;
   border-radius: 25px 25px 0px 0px;
-  color:white;
+  color: #eceff4;
 }
-.musiccontrols{
-  background-color: #252525;
+
+.musiccontrols {
+  background-color: #3b4252;
   min-width: 170px;
   padding: 5px 20px;
   border-radius: 20px;
 }
-.musicbutton{
-  margin-top: 0px;
+
+.musicbutton {
   font-size: 20px;
 }
-.musictitle{
+
+.musictitle {
   margin-top: 5px;
-  font-size:15px;
+  font-size: 15px;
   font-weight: 600;
 }
+
 .musicscale scale trough highlight {
-  all: unset;
-  background-color: #d6d6d6;
+  background-color: #eceff4;
   color: white;
   border-radius: 10px;
-  min-width: 10px;
+  min-height: 10px;
 }
+
 .musicscale scale trough {
-  all: unset;
-  background-color: #1a1a1a;
+  background-color: #434c5e;
   border-radius: 50px;
   min-height: 10px;
   min-width: 140px;
   margin: 0px 10px;
 }
-.musicscale label{
+
+.musicscale label {
   font-size: 13px;
 }
-.musicart{
-  border: 2px solid #252525;
-  background-image: unset;
+
+/* Notifications */
+.notificationwidget {
+  background-color: #2e3440;
+  border-radius: 25px 0px 0px 0px;
+  padding: 10px 10px 5px 10px;
+  color: #eceff4;
 }
 
-.notificationwidget{
-  background-color:#111111;
-  border-radius:25px 0px 0px 0px;
-  padding: 10px 10px 5px 10px;
-}
-.notificationwidget{
-  color: white;
-}
-.notificationbox{
-  background-color: #252525;
+.notificationbox {
+  background-color: #3b4252;
   min-width: 200px;
   padding: 15px;
   border-radius: 20px;
 }
-.notificationicon{
+
+.notificationicon {
   font-size: 18px;
   padding-right: 20px;
 }
 
-.summary{
+.summary {
   font-size: 20px;
   font-weight: 700;
 }
 
-.calendarcenter1{
-  color: white;
-  background-color: #111111;
+/* Calendar */
+.calendarcenter1 {
+  color: #eceff4;
+  background-color: #2e3440;
   border-radius: 25px 0px 0px 0px;
   padding: 10px 10px 5px 10px;
 }
-.month{
+
+.month {
   margin: 0px 0px 10px 10px;
   font-weight: 700;
   font-size: 17px;
 }
-.calendar{
-  background-color: #252525;
+
+.calendar {
+  background-color: #3b4252;
   min-width: 255px;
   min-height: 285px;
   padding: 10px;
   border-radius: 20px;
 }
 
-.calendardays label{
-  margin: -15px -15px;
-}
-.currentday, .calendardays label:hover{
-  border-radius: 20px;
-  color: black;
-  background-color: #d6d6d6;
+.calendardays label {
+  margin: -10px -10px;
 }
 
-.invalidday{
-  color: gray;
+.currentday,
+.calendardays label:hover {
+  border-radius: 20px;
+  color: #2e3440;
+  background-color: #eceff4;
 }
-.daynames label{
+
+.invalidday {
+  color: #616e88;
+}
+
+.daynames label {
   margin: 0px -10px;
 }
 
-.notificationhistory{
-  color: white;
-  background-color: #111111;
+/* Notification History */
+.notificationhistory {
+  color: #eceff4;
+  background-color: #2e3440;
   min-width: 255px;
   padding: 10px;
   border-radius: 25px 0px 0px 25px;
 }
 
-
-.notifscroll{
+.notifscroll {
   min-height: 326px;
 }
-.notificationhistory button{
-  background-color: #252525;
+
+.notificationhistory button {
+  background-color: #3b4252;
   padding: 8px;
   border-radius: 20px;
   font-size: 15px;
+  transition: all 0.2s ease-in-out;
 }
