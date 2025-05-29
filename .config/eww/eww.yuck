@@ -8,48 +8,44 @@
 
 (defwindow powermenu
   :monitor 0
-  :exclusive "false"
+  :exclusive false
   :windowtype "normal"
   :stacking "fg"
   :geometry (geometry :x "55" :y "0" :width "150px" :height "40px" :anchor "bottom right")
   :reserve (struts :side "right" :distance "4%")
   (box :class "powerbuttons"
-    (button :class "poweroff" :onclick "poweroff &" "")
-    (button :class "restart" :onclick "reboot &" "")
-    (button :class "sleep" :onclick "eww open powermenu --toggle & systemctl suspend &" "")
+    (button :class "poweroff" :onclick "systemctl poweroff &" "")
+    (button :class "restart" :onclick "systemctl reboot &" "")
+    (button :class "sleep" :onclick "eww close powermenu; systemctl suspend &" "")
   )
 )
 
 ;; ======= VARIABLES CRÍTICAS DEFINIDAS =======
-(defpoll volume :interval "1s" "~/.config/eww/scripts/getVol.sh")
-(deflisten is_muted :initial "false" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo true || echo false")
-(defpoll brightness :interval "1s" "brightnessctl get | awk '{printf(\"%d\", $1/255 * 100)}'")
-(defpoll temp :interval "30s" "cat /sys/class/thermal/thermal_zone0/temp | awk '{print $1/1000}'")
-(defpoll memoryusage :interval "5s" "free | awk '/Mem:/ {printf(\"%.1f\", $3/$2 * 100)}'")
-(defpoll cpusage :interval "3s" "top -bn1 | grep 'Cpu(s)' | sed 's/.*, *\\([0-9.]*\\)%* id.*/\\1/' | awk '{print 100 - $1}'")
-(deflisten networkstatus :initial "" "nmcli networking connectivity")
-(defpoll bluetoothstatus :interval "5s" "bluetoothctl show | grep -q 'Powered: yes' && echo 'yes' || echo 'no'")
-(defvar nighttoggle false)
-(defpoll uptime :interval "60s" "uptime -p | sed 's/up //'")
+(defpoll volume :interval "1s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}'")
+(defvar ismusicopenornot false)
+(defvar is_muted "false")
 ;; ============================================
 
 (defwidget meters []
-  (box :class "meters" :orientation "h" :halign "end" :spacing 12 :space-evenly "false"
+  (box :class "meters" :orientation "h" :halign "end" :spacing 12 :space-evenly false
     (metric :label "󰍛" :value "󱃃 ${temp}C" :onchange "" :onclick "")
     (metric :label "󰍛" :value "󰍛  ${memoryusage}%" :onchange "" :onclick "")
     (metric :label "󰻠" :value "󰻠  ${cpusage}%" :onchange "" :onclick "")
-    (metric :label "" 
-            :value {is_muted == "true" ? "󰝟" : "󰕾  ${volume}%"} 
-            :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}% &" 
-            :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle &")
+    (metric :label ""
+      :value {is_muted == "true" ? "󰝟" : "󰕾  ${volume}%"}
+      :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
+      :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && eww update is_muted={is_muted == \"true\" ? \"false\" : \"true\"}")
   )
 )
 
 (defwidget connectivity []
   (box :class "connectivity" :spacing 10
-    (button :class "bluetooth" :onclick "rofi-bluetooth &" "")
-    (button :class "wifi" :onclick "rofi-bluetooth &" {networkstatus != "" ? "󰤨" : "󰤭"})
-    (button :class "power" :onclick "eww open powermenu --toggle &" "")
+    (button :class {bluetoothstatus == "yes" ? "bluetooth enabled" : "bluetooth"}
+      :onclick "bluetoothctl power toggle && eww update bluetoothstatus={bluetoothstatus == \"yes\" ? \"no\" : \"yes\"}" "")
+    (button :class {networkstatus == "full" ? "wifi enabled" : "wifi"}
+      :onclick "nmcli radio wifi toggle"
+      {networkstatus == "full" ? "󰤨" : "󰤭"})
+    (button :class "power" :onclick "eww open powermenu --toggle" "")
   )
 )
 
@@ -71,12 +67,14 @@
 )
 
 (defwidget launcher []
-  (button :class "launcher" :onclick "killall rofi || rofi -show drun -theme ~/.config/rofi/config.rasi &" "")
+  (button :class "launcher" 
+    :onclick "pidof rofi >/dev/null && killall rofi || rofi -show drun -theme ~/.config/rofi/config.rasi &"
+    "")
 )
 
 (defwidget workspaces [array]
   (box :class "workspaces" :orientation "h" :space-evenly false :spacing 1 :halign "start"
-    (for entry in array
+    (for entry in {array}
       (button
         :onclick "swaymsg workspace ${entry.name}"
         :class {entry.focused ? "focused" : ""}
@@ -88,28 +86,28 @@
 
 (defwidget music []
   (button :class "music" :halign "center" :style { music == "" ? "background-color:transparent" : ""}
-    :onclick {ismusicopenornot != false ? "eww open musiccenter --toggle --no-daemonize & eww update ismusicopenornot=false" : 
-              ismusicopenornot != true ? "eww open musiccenter --no-daemonize & eww update ismusicopenornot=true" : 
-              "Nothing is currently playing."}
-    {ismusicopenornot != false ? "󰅖" : music != "" ? "  ${music}" : ""}
+    :onclick {ismusicopenornot ? "eww close musiccenter & eww update ismusicopenornot=false" :
+              "eww open musiccenter & eww update ismusicopenornot=true"}
+    {music == "" ? "" : "  ${music}"}
   )
 )
 
 (defwidget metric [label value onchange onclick]
   (box :orientation "h" :class "metric" :space-evenly false
-    (button :onclick onclick ${value})
+    (button :onclick {onclick} {value})
   )
 )
 
 (defpoll username :interval "100s" "whoami")
 (defpoll hostname :interval "100s" "cat /etc/hostname")
+(defpoll uptime :interval "60s" "uptime -p | sed 's/up //'")
 
 (defwidget topcenter []
-  (box :class "topcenter" :orientation "h" :halign "start" :spacing 10 :space-evenly "false"
-    (image :class "pfp" :valign "start" 
-           :style "background-image: url(\"${HOME}/HyprZent-v2/themes/assets/profile/zenthrax.png\")")
-    (box :orientation "v" :space-evenly "false" :valign "center" :spacing 5
-      (label :class "welcometext" :text username :halign "start" :valign "center")
+  (box :class "topcenter" :orientation "h" :halign "start" :spacing 10 :space-evenly false
+    (image :class "pfp" :valign "start"
+      :path "${HOME}/HyprZent-v2/themes/assets/profile/zenthrax.png")
+    (box :orientation "v" :space-evenly false :valign "center" :spacing 5
+      (label :class "welcometext" :text "Welcome" :halign "start" :valign "center")
       (label :text "${username}@${hostname}" :halign "start" :valign "start" :style "color: #1e66f5")
       (label :text "${uptime}" :halign "start" :valign "start" :style "color: #1e66f5")
     )
@@ -125,20 +123,20 @@
 (defwidget bottomcenter []
   (box :class "bottomcenter" :valign "end" :orientation "v" :halign "center" :spacing 10
     (box :spacing 10
-      (button :class { networkstatus != "" ? "testenabled" : "test"} 
-              :onclick {networkstatus != "" ? "rfkill block wifi &" : "rfkill unblock wifi"} 
-              "󰤨  ")
-      (button :class { bluetoothstatus != "no" ? "testenabled" : "test"}  
-              :onclick {bluetoothstatus != "no" ? "bluetoothctl power off" : "bluetoothctl power on"}  
-              "")
-      (button :class { nighttoggle != false ? "testenabled" : "test"} 
-              :onclick {nighttoggle != false ? "wlsunset -t 0 & eww update nighttoggle=false" : "wlsunset -t 5200 -S 0:00 -s 0:00 & eww update nighttoggle=true"} 
-              "  ")
+      (button :class { networkstatus == "full" ? "testenabled" : "test"}
+        :onclick "nmcli radio wifi toggle"
+        "󰤨  ")
+      (button :class { bluetoothstatus == "yes" ? "testenabled" : "test"}
+        :onclick "bluetoothctl power toggle"
+        "")
+      (button :class { nighttoggle ? "testenabled" : "test"}
+        :onclick {nighttoggle ? "wlsunset -t 0 & eww update nighttoggle=false" : "wlsunset -t 5200 -S 0:00 -s 0:00 & eww update nighttoggle=true"}
+        "  ")
     )
     (box :spacing 10
-      (button :class "test" :onclick "eww open actioncenter --toggle; grim -g '$(slurp)' - | swappy -f - &" "󰹑  ")
-      (button :class "test" :onclick "thunar ~ & eww open actioncenter --toggle &" " ")
-      (button :class "test" :onclick "bash lightmode.sh" "")
+      (button :class "test" :onclick "eww close actioncenter; grim -g '$(slurp)' - | swappy -f - &" "󰹑  ")
+      (button :class "test" :onclick "thunar ~ & eww close actioncenter &" " ")
+      (button :class "test" :onclick "eww close actioncenter; systemctl suspend &" "")
     )
   )
 )
@@ -146,13 +144,13 @@
 (defwidget scalecenter [label value onchange]
   (box :orientation "h" :class "scalecenter" :space-evenly false
     (box :class "label" label)
-    (scale :min 0 :max 101 :active {onchange != ""} :value value :onchange onchange)
+    (scale :min 0 :max 100 :active {onchange != ""} :value value :onchange onchange)
   )
 )
 
 (defwindow actioncenter
   :monitor 0
-  :exclusive "false"
+  :exclusive false
   :windowtype "normal"
   :stacking "fg"
   :geometry (geometry :x "0" :y "0" :width "300px" :height "300px" :anchor "bottom right")
@@ -166,32 +164,39 @@
 
 (defwidget time []
   (box :class "time" :orientation "h" :space-evenly false :valign "center"
-    (button :onclick "eww open actioncenter --toggle --no-daemonize &" 
-            :onrightclick "eww open calendarcenter --toggle --no-daemonize &" 
-            "${hours}:${minutes} ${pmoram}")
+    (button :onclick "eww open actioncenter --toggle"
+      :onrightclick "eww open calendarcenter --toggle"
+      "${hours}:${minutes} ${pmoram}")
   )
 )
 
 (defpoll hours :interval "1s" "date +%I")
 (defpoll minutes :interval "1s" "date +%M")
 (defpoll pmoram :interval "1s" "date +%p")
+(defpoll brightness :interval "1s" "brightnessctl get | awk '{printf \"%.0f\", $1/2.55}'")
+(defpoll temp :interval "10s" "cat /sys/class/thermal/thermal_zone*/temp 2>/dev/null | head -n1 | awk '{printf \"%.0f\", $1/1000}'")
+(defpoll memoryusage :interval "5s" "free | awk '/Mem/ {printf \"%.0f\", $3/$2*100}'")
+(defpoll cpusage :interval "2s" "top -bn1 | grep 'Cpu(s)' | sed 's/.*, *\\([0-9.]*\\)%* id.*/\\1/' | awk '{print 100 - $1}'")
+(defpoll networkstatus :interval "5s" "nmcli -t -f active,ssid dev wifi | grep -q '^yes' && echo 'full' || echo 'none'")
+(defpoll bluetoothstatus :interval "5s" "bluetoothctl show | grep -q 'Powered: yes' && echo 'yes' || echo 'no'")
+(defpoll music :interval "1s" "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo ''")
 
 (defwindow notificationwidget
   :monitor 0
-  :exclusive "true"
+  :exclusive true
   :windowtype "dialog"
   :stacking "fg"
-  :geometry (geometry :x "0" :y "0" :width "0px" :height "0px" :anchor "bottom right")
+  :geometry (geometry :x "0" :y "0" :width "300px" :height "80px" :anchor "top right")
   :reserve (struts :side "right" :distance "4%")
   (revealer :transition "slideup" :duration "500ms" :reveal notificationreveal
-    (box :orientation "h" :space-evenly "false"
-      (box :orientation "v" :space-evenly "false" :valign "center" :class "notificationbox"
-        (box :spacing 10 :space-evenly "false"
+    (box :orientation "h" :space-evenly false
+      (box :orientation "v" :space-evenly false :valign "center" :class "notificationbox"
+        (box :spacing 10 :space-evenly false
           (label :class "summary" :text "${notification.summary}" :halign "start")
-          (label :class "notificationicon" :text {notification.source == "Spotify" ? "" : 
-                                                 notification.source == "PIPEWIRE" ? "󰋋" : 
-                                                 notification.source == "firefox" ? "󰈹" : ""} 
-                 :halign "start")
+          (label :class "notificationicon" :text {notification.source == "Spotify" ? "" :
+                notification.source == "PIPEWIRE" ? "󰋋" :
+                notification.source == "firefox" ? "󰈹" : ""}
+                :halign "start")
         )
         (label :class "body" :text "${notification.body}" :halign "start")
       )
@@ -201,12 +206,12 @@
 
 (defwindow bar
   :monitor 0
-  :exclusive "true"
-  :focusable "false"
+  :exclusive true
+  :focusable false
   :windowtype "normal"
   :stacking "fg"
-  :geometry (geometry :x "0" :y "0" :width "100%" :height "40px" :anchor "bottom center")
-  :reserve (struts :side "left" :distance "4%")
+  :geometry (geometry :x "0" :y "0" :width "100%" :height "40px" :anchor "top center")
+  :reserve (struts :side "top" :distance "40px")
   (bar)
 )
 
