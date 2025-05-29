@@ -21,7 +21,7 @@
 )
 
 ;; ======= VARIABLES CRÍTICAS DEFINIDAS =======
-(defpoll volume :interval "1s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk -F': ' '{print $2*100}' | cut -d'.' -f1")
+(defpoll volume :interval "1s" "~/.config/eww/scripts/getVol.sh")
 (deflisten is_muted :initial "false" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo true || echo false")
 (defpoll brightness :interval "1s" "brightnessctl get | awk '{printf(\"%d\", $1/255 * 100)}'")
 (defpoll temp :interval "30s" "cat /sys/class/thermal/thermal_zone0/temp | awk '{print $1/1000}'")
